@@ -1,0 +1,232 @@
+/* DM Sans · latin */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 1000;
+  src: url('./files/dm-sans-latin-wght-normal.woff2') format('woff2-variations'),
+       url('./files/dm-sans-latin-wght-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+/* DM Sans · latin-ext */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 1000;
+  src: url('./files/dm-sans-latin-ext-wght-normal.woff2') format('woff2-variations'),
+       url('./files/dm-sans-latin-ext-wght-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+/* Noto Sans SC · subsetted for app-used characters */
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-29-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-29-wght-normal.woff2') format('woff2');
+  unicode-range: U+94be;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-50-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-50-wght-normal.woff2') format('woff2');
+  unicode-range: U+787c;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-59-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-59-wght-normal.woff2') format('woff2');
+  unicode-range: U+6e89;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-101-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-101-wght-normal.woff2') format('woff2');
+  unicode-range: U+6c2e,U+9541;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-103-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-103-wght-normal.woff2') format('woff2');
+  unicode-range: U+78f7;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-104-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-104-wght-normal.woff2') format('woff2');
+  unicode-range: U+69b4,U+6c70,U+81a8;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-105-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-105-wght-normal.woff2') format('woff2');
+  unicode-range: U+82bd,U+9499;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-106-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-106-wght-normal.woff2') format('woff2');
+  unicode-range: U+5300,U+6795;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-107-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-107-wght-normal.woff2') format('woff2');
+  unicode-range: U+5398;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-108-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-108-wght-normal.woff2') format('woff2');
+  unicode-range: U+50ac,U+7a00;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-109-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-109-wght-normal.woff2') format('woff2');
+  unicode-range: U+5806,U+5faa,U+65a4,U+7c92,U+80de;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-110-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-110-wght-normal.woff2') format('woff2');
+  unicode-range: U+58ee,U+7af9,U+8017,U+83b2,U+867e,U+88c2,U+9a71,U+9f20;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-111-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-111-wght-normal.woff2') format('woff2');
+  unicode-range: U+4f30,U+500d,U+52ff,U+5e7c,U+5f84,U+6062,U+6269,U+66ff,U+704c,U+7518,U+8bf1,U+9075,U+9636,U+9f84;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-112-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-112-wght-normal.woff2') format('woff2');
+  unicode-range: U+4e39,U+4fc3,U+51a0,U+51e4,U+523a,U+5c3a,U+80a5,U+9010,U+907f,U+91ca,U+9694;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-113-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-113-wght-normal.woff2') format('woff2');
+  unicode-range: U+53f6,U+5750,U+6388,U+6811,U+6dd8,U+719f,U+732b,U+732e,U+7ade,U+811a,U+8f6e;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-114-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-114-wght-normal.woff2') format('woff2');
+  unicode-range: U+4e89,U+505c,U+519c,U+51cf,U+57f9,U+591c,U+5b63,U+5dee,U+5f02,U+65bd,U+677e,U+699c,U+6ce2,U+6fc0,U+7c89,U+7eaf,U+7eff,U+82cf,U+836f,U+8865,U+8ffd;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-115-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-115-wght-normal.woff2') format('woff2');
+  unicode-range: U+4ec5,U+4f8b,U+5145,U+517b,U+51b5,U+5212,U+5219,U+521d,U+5747,U+589e,U+5c3d,U+5e72,U+6309,U+6838,U+6b62,U+6bb5,U+6ee1,U+72b6,U+773c,U+7b97,U+7c73,U+7d20,U+7efc,U+826f,U+843d,U+9884;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-116-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-116-wght-normal.woff2') format('woff2');
+  unicode-range: U+4f4e,U+4f9b,U+5148,U+53c2,U+53d8,U+5411,U+5468,U+5c71,U+5f20,U+5f3a,U+5f62,U+62a4,U+6307,U+6362,U+636e,U+6548,U+672a,U+6b65,U+6bcf,U+738b,U+7559,U+7ea2,U+7ea6,U+7ec6,U+8003,U+80b2,U+81f3-81f4,U+8425,U+8be5,U+8fbe,U+901f,U+91c7,U+9700,U+9752,U+9ed1;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-117-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-117-wght-normal.woff2') format('woff2');
+  unicode-range: U+4e24,U+4e8c,U+4ea4,U+4ece,U+4f7f,U+4fdd,U+514d,U+5177,U+5357,U+5373,U+578b,U+590d,U+5bfc,U+5c06,U+5c11,U+5df2,U+5e38,U+5e94,U+5efa,U+5feb,U+60f3,U+6216,U+6301,U+652f,U+6599,U+671f,U+6848,U+6b64,U+6bd4,U+6c34,U+6e90,U+7136,U+76ee,U+76f4,U+793a,U+79cd,U+7acb,U+7b2c,U+7ba1,U+7ea7,U+7ed3,U+82b1,U+89c4,U+8ba1,U+8d28,U+8d77,U+8d85,U+8f6c,U+9009,U+91cd,U+91cf;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-118-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-118-wght-normal.woff2') format('woff2');
+  unicode-range: U+4e09-4e0b,U+4e0d-4e0e,U+4e1a,U+4e2a,U+4e3a,U+4e8e,U+4ea7,U+4ee5,U+4f1a,U+4f53,U+4fe1,U+5168,U+516c,U+5173,U+5206,U+5230,U+5236,U+524d,U+52a8,U+5316,U+53d1,U+53ef,U+5408,U+540c,U+540e,U+548c,U+54c1,U+5728,U+5927,U+5929,U+5b66,U+5b9e,U+5bb6,U+5bf9,U+5de5,U+5e74,U+5ea6,U+5f00,U+5f0f,U+60c5,U+6210,U+6240,U+63d0,U+6536,U+6570,U+6587,U+65b9,U+65f6,U+6700,U+672c,U+673a,U+6765,U+679c,U+6b21,U+73b0,U+7406,U+751f,U+7528,U+7c7b,U+8005,U+80fd,U+81ea,U+884c,U+8981,U+89c6,U+8bf7,U+8fc7,U+8fdb,U+91d1,U+957f,U+95f4,U+9762,U+9875,U+9ad8,U+ff08-ff09;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('./files/noto-sans-sc-119-wght-normal.woff2') format('woff2-variations'),
+       url('./files/noto-sans-sc-119-wght-normal.woff2') format('woff2');
+  unicode-range: U+3002,U+4e00,U+4e2d,U+65b0,U+65e5,U+6708-6709,U+7684,U+ff0c,U+ff1a;
+}
