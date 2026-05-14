@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Fertilizer Planner · 肥培管理</title>
+
+<!-- PWA -->
+<meta name="description" content="Durian fertilizer planner · 榴莲肥培管理规划工具" />
+<meta name="theme-color" content="#059669" />
+<meta name="application-name" content="Fertilizer Planner" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Fertilizer Planner" />
+<link rel="manifest" href="./manifest.json" />
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png" />
+<link rel="apple-touch-icon" href="./icons/icon-192.png" />
+
+<link rel="stylesheet" href="./vendor/fonts/fonts.css" />
+<script src="./vendor/lucide.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #cbd5e1;
+    --card: #f1f5f9;
+    --card2: #e2e8f0;
+    --card3: #d1d7e0;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --text2: #475569;
+    --text3: #94a3b8;
+    --green: #059669;
+    --green-bg: #d1fae5;
+    --green-border: #6ee7b7;
+    --blue: #2563eb;
+    --blue-bg: #dbeafe;
+    --blue-border: #93c5fd;
+    --amber: #92400e;
+    --amber-bg: #fef3c7;
+    --amber-border: #fbbf24;
+    --indigo-bg: #e0e7ff;
+    --indigo-text: #312e81;
+    --lime-bg: #d9f99d;
+    --lime-text: #365314;
+    --tag-f-bg: #fde68a;
+    --tag-f-text: #78350f;
+    --orange: #c2410c;
+    --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+    --radius: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --font: 'DM Sans', 'Noto Sans SC', sans-serif;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .app-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+    background: var(--card);
+    min-height: 100vh;
+  }
+
+  @media (min-width: 640px) {
+    body { padding: 40px 24px; background: var(--bg); }
+    .app-wrap {
+      margin: 0 auto;
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+      min-height: auto;
+    }
+  }
+
+  /* ── Typography helpers ── */
+  .label-xs {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--text2);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .font-black { font-weight: 900; }
+  .font-bold { font-weight: 700; }
+  .font-semibold { font-weight: 600; }
+
+  /* ── Header ── */
+  .header {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+  .header h2 {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 2px;
+  }
+  .header p {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text2);
+  }
+  @media (min-width:640px) { .header h2 { font-size: 26px; } .header p { font-size: 14px; } }
+
+  /* ── Grid helpers ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .grid-9 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .grid-4m { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (min-width:640px) {
+    .grid-2 { grid-template-columns: 1fr 1fr 1fr; }
+    .grid-2 .mode-col { grid-column: span 1; }
+    .grid-5 { gap: 10px; }
+    .grid-9 { grid-template-columns: repeat(9, 1fr); gap: 8px; }
+    .grid-4m { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  }
+  @media (min-width:768px) {
+    .prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  }
+
+  .mb-3 { margin-bottom: 12px; }
+  .mb-4 { margin-bottom: 16px; }
+  .mb-5 { margin-bottom: 20px; }
+  .mb-6 { margin-bottom: 24px; }
+  .mb-8 { margin-bottom: 32px; }
+  .mt-3 { margin-top: 12px; }
+  .mt-5 { margin-top: 20px; }
+  .mt-6 { margin-top: 24px; }
+  .pt-2 { padding-top: 8px; }
+  .pt-3 { padding-top: 12px; }
+  .gap-3 { gap: 12px; }
+  .gap-2 { gap: 8px; }
+
+  /* ── Controls ── */
+  .ctrl-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  @media (min-width:640px) {
+    .ctrl-row { grid-template-columns: 1fr 1fr 1fr; }
+    .ctrl-mode { grid-column: auto; }
+  }
+  .ctrl-mode { grid-column: span 2; }
+  @media (min-width:640px) { .ctrl-mode { grid-column: auto; } }
+
+  select, input[type="date"] {
+    width: 100%;
+    height: 48px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card2);
+    font-size: 15px;
+    font-weight: 700;
+    font-family: var(--font);
+    color: var(--text);
+    outline: none;
+    cursor: pointer;
+    transition: box-shadow .15s;
+    -webkit-appearance: none;
+  }
+  select:focus, input[type="date"]:focus {
+    box-shadow: 0 0 0 2px var(--green);
+  }
+  .select-wrap { position: relative; }
+  .select-wrap::after {
+    content: '▾';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--text2);
+    font-size: 12px;
+  }
+
+  /* ── Mode toggle ── */
+  .mode-toggle {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    height: 48px;
+    box-shadow: var(--shadow);
+  }
+  .mode-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: var(--font);
+    border: none;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+    background: var(--card2);
+    color: var(--text2);
+  }
+  .mode-btn.active-org { background: var(--green); color: #fff; }
+  .mode-btn.active-sko { background: var(--blue); color: #fff; }
+  .mode-btn:hover:not(.active-org):not(.active-sko) { background: var(--card3); }
+  .mode-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* ── Age tier buttons ── */
+  .age-btn {
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--card2);
+    color: var(--text2);
+    cursor: pointer;
+    transition: all .15s;
+    min-height: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 6px 4px;
+    font-family: var(--font);
+  }
+  .age-btn .a-label { font-size: 12px; font-weight: 700; line-height: 1.2; }
+  .age-btn .a-cn { font-size: 11px; font-weight: 700; line-height: 1.2; }
+  @media (min-width:640px) { .age-btn .a-label, .age-btn .a-cn { font-size: 13px; } }
+  .age-btn:hover:not(.active) { background: var(--card3); }
+  .age-btn.active { background: #78350f; color: #fff; border-color: #78350f; box-shadow: var(--shadow-md); }
+
+  /* ── Age info strip ── */
+  .age-info {
+    background: var(--amber-bg);
+    border: 1px solid var(--amber-border);
+    border-radius: var(--radius-lg);
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--amber);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+  .age-info svg { width: 16px; height: 16px; color: #b45309; flex-shrink: 0; }
+
+  /* ── Stage picker ── */
+  .stage-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 4px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--card2);
+    color: var(--text2);
+    cursor: pointer;
+    transition: all .15s;
+    min-height: 72px;
+    gap: 4px;
+    font-family: var(--font);
+  }
+  @media (min-width:640px) { .stage-btn { min-height: 80px; padding: 8px 6px; } }
+  .stage-btn:hover:not(.s-active) { background: var(--card3); }
+  .stage-btn.s-active { border: none; box-shadow: var(--shadow-md); }
+  .stage-num {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .stage-btn .s-name { font-size: 11px; font-weight: 700; line-height: 1.2; text-align: center; }
+  .stage-btn .s-cn { font-size: 10px; font-weight: 700; line-height: 1.2; text-align: center; opacity: .8; }
+  @media (min-width:640px) { .stage-btn .s-name { font-size: 12px; } .stage-btn .s-cn { font-size: 11px; } }
+
+  /* ── Dashboard metrics ── */
+  .metric-card {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 12px 16px;
+    box-shadow: var(--shadow);
+  }
+  .metric-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--text2); margin-bottom: 4px; }
+  .metric-val { font-size: 15px; font-weight: 900; line-height: 1.2; }
+  .metric-sub { font-size: 12px; font-weight: 600; color: var(--text2); margin-top: 2px; }
+
+  /* ── Banners ── */
+  .banner {
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    box-shadow: var(--shadow);
+  }
+  .banner svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; }
+  .banner-amber { background: var(--amber-bg); border: 2px solid var(--amber-border); color: var(--amber); }
+  .banner-green { background: var(--green-bg); border: 1px solid var(--green-border); color: #065f46; }
+  .banner-title { font-size: 14px; font-weight: 900; margin-bottom: 4px; }
+  .banner-body { font-size: 13px; font-weight: 700; line-height: 1.5; }
+  .banner-sep { border-top: 1px solid; margin-top: 8px; padding-top: 8px; opacity: .5; }
+  @media (min-width:640px) { .banner-title { font-size: 15px; } }
+
+  /* ── Accordion ── */
+  .acc-wrapper { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .acc-group {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .acc-group-past { background: rgba(226,232,240,.5); border: 1px solid var(--border); }
+  .acc-group-future { background: rgba(219,234,254,.5); border: 1px solid var(--blue-border); }
+  .acc-group-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    min-height: 60px;
+    font-family: var(--font);
+    transition: background .15s;
+  }
+  .acc-group-btn:hover { background: rgba(0,0,0,.04); }
+  .acc-group-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .acc-group-icon svg { width: 16px; height: 16px; }
+  .icon-past { background: var(--card3); color: var(--text2); }
+  .icon-future { background: rgba(191,219,254,.7); color: #1d4ed8; }
+  .acc-group-title { font-size: 14px; font-weight: 700; }
+  .acc-group-sub { font-size: 12px; font-weight: 700; opacity: .7; }
+  .acc-past-title { color: var(--text2); }
+  .acc-future-title { color: #1e3a8a; }
+  .acc-future-sub { color: rgba(29,78,216,.7); }
+  .acc-group-content { padding: 0 12px 12px; display: flex; flex-direction: column; gap: 12px; }
+  .acc-group-content .mt3 { margin-top: 12px; display: flex; flex-direction: column; gap: 12px; }
+
+  /* Stage accordion item */
+  .stage-acc {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    background: var(--card);
+    transition: border-color .15s;
+  }
+  .stage-acc.current { border-width: 2px; box-shadow: var(--shadow-md); }
+  .stage-acc-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    min-height: 60px;
+    font-family: var(--font);
+    transition: background .15s;
+  }
+  .stage-acc-btn:hover { background: rgba(0,0,0,.04); }
+  .stage-badge {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 900;
+    flex-shrink: 0;
+  }
+  .stage-acc-info { flex: 1; min-width: 0; }
+  .stage-acc-name {
+    font-size: 13px; font-weight: 900;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+    color: var(--text);
+  }
+  @media (min-width:640px) { .stage-acc-name { font-size: 15px; } }
+  .stage-acc-phase { font-size: 11px; font-weight: 600; color: var(--text3); margin-top: 2px; }
+  .pill-now { background: var(--green); color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 9999px; font-weight: 900; text-transform: uppercase; letter-spacing: .05em; }
+  .pill-past { background: var(--card3); color: var(--text2); font-size: 10px; padding: 2px 8px; border-radius: 9999px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+  .stage-acc-dates { text-align: right; flex-shrink: 0; }
+  .stage-date-val { font-size: 11px; font-weight: 900; color: var(--text); white-space: nowrap; }
+  .stage-dur { font-size: 10px; font-weight: 700; color: var(--text3); }
+  .stage-chev svg { width: 16px; height: 16px; color: var(--text3); flex-shrink: 0; }
+
+  /* Stage accordion body */
+  .stage-body { border-top: 1px solid var(--border); background: var(--card); }
+  .past-notice {
+    margin: 16px 16px 0;
+    padding: 12px;
+    background: rgba(226,232,240,.6);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 13px; font-weight: 700; color: var(--text2);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .body-section {
+    padding: 16px;
+    border-left: 4px solid;
+  }
+  .body-section.org { border-color: var(--green); }
+  .body-section.sko { border-color: var(--blue); }
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+    width: 100%;
+  }
+  .badge-org { background: var(--green-bg); color: #065f46; }
+  .badge-sko { background: var(--blue-bg); color: #1e3a8a; }
+  .sko-rotation {
+    background: rgba(219,234,254,.5);
+    border: 1px solid var(--blue-border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+    white-space: pre-line;
+  }
+  .sko-rotation b { display: block; margin-bottom: 4px; }
+  .sub-section-label {
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 8px;
+  }
+  .sub-org-label { color: var(--green); }
+  .sub-chem-label { color: var(--blue); margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+  .prod-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 14px; }
+  @media (min-width:640px) { .prod-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width:768px) { .prod-grid { grid-template-columns: repeat(4, 1fr); } }
+  .notes-box {
+    background: rgba(226,232,240,.5);
+    border-left: 4px solid var(--green);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 12px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.6;
+    box-shadow: var(--shadow);
+    margin-top: 4px;
+  }
+  .notes-box .cn { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+
+  /* ── Prod Chip ── */
+  .prod-chip {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    padding: 14px;
+    gap: 10px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    background: rgba(226,232,240,.6);
+  }
+  .prod-chip.chem { border-color: var(--blue-border); background: rgba(219,234,254,.5); }
+  .chip-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  .chip-name { font-size: 13px; font-weight: 900; line-height: 1.3; color: var(--text); }
+  .chip-cn { font-size: 12px; font-weight: 900; color: var(--text2); margin-top: 2px; }
+  .chip-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .tag-c { background: var(--lime-bg); color: var(--lime-text); }
+  .tag-g { background: var(--blue-bg); color: #1e3a8a; }
+  .tag-f { background: var(--tag-f-bg); color: var(--tag-f-text); }
+  .tag-ch { background: var(--indigo-bg); color: var(--indigo-text); }
+  .chip-dose { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .chip-dose-val { font-size: 15px; font-weight: 900; color: var(--green); }
+  .chip-dose-cn { font-size: 12px; font-weight: 900; color: var(--green); opacity: .8; }
+  .chip-dose-note { font-size: 11px; font-weight: 600; color: var(--text2); font-style: italic; }
+  .chip-freq {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    border-top: 1px solid rgba(0,0,0,.08);
+    padding-top: 8px;
+  }
+  .chip-freq svg { width: 14px; height: 14px; color: var(--text3); flex-shrink: 0; margin-top: 2px; }
+  .chip-freq-text { font-size: 13px; font-weight: 900; line-height: 1.3; }
+  .chip-freq-cn { font-size: 12px; font-weight: 600; color: var(--text2); }
+
+  /* ── Shopping list ── */
+  .shop-section { border-top: 1px solid var(--border); padding-top: 24px; margin-top: 24px; }
+  .shop-title { font-size: 15px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .shop-title svg { width: 20px; height: 20px; color: var(--text2); }
+  @media (min-width:640px) { .shop-title { font-size: 17px; } }
+
+  /* Table (desktop) */
+  .shop-table-wrap { display: none; }
+  @media (min-width:640px) { .shop-table-wrap { display: block; border-radius: var(--radius-lg); border: 1px solid var(--border); overflow: hidden; box-shadow: var(--shadow); } }
+  .shop-table { width: 100%; border-collapse: collapse; background: var(--card); text-align: left; }
+  .shop-table thead { background: var(--card2); }
+  .shop-table th {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--text2);
+  }
+  .shop-table td { padding: 14px 16px; border-bottom: 1px solid rgba(0,0,0,.05); font-size: 13px; vertical-align: top; }
+  .shop-table tr:last-child td { border-bottom: none; }
+  .shop-table tr:hover td { background: rgba(0,0,0,.02); }
+  .shop-td-name { font-weight: 700; color: var(--text); }
+  .shop-td-cn { font-weight: 700; color: var(--text2); margin-top: 2px; }
+  .shop-td-dose { font-weight: 700; color: var(--green); }
+  .shop-stg-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .shop-stg-row:last-child { margin-bottom: 0; }
+  .shop-stg-num { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .shop-stg-name { font-size: 11px; font-weight: 700; color: var(--text2); }
+
+  /* Mobile card list */
+  .shop-cards { display: flex; flex-direction: column; gap: 12px; }
+  @media (min-width:640px) { .shop-cards { display: none; } }
+  .shop-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px; box-shadow: var(--shadow); }
+  .shop-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+  .shop-card-name { font-weight: 900; font-size: 13px; color: var(--text); }
+  .shop-card-cn { font-weight: 900; font-size: 13px; color: var(--text2); margin-top: 2px; }
+  .shop-card-dose { font-size: 15px; font-weight: 900; color: var(--green); margin-bottom: 10px; }
+  .shop-card-stages { display: flex; flex-wrap: wrap; gap: 6px; }
+  .shop-stage-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 900; color: #fff; padding: 4px 10px; border-radius: 9999px; }
+
+  /* Footer note */
+  .footer-note {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text2);
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+  .footer-note .cn { color: var(--text3); display: block; }
+  .footer-note .warn { display: flex; align-items: flex-start; gap: 8px; color: #92400e; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-weight: 700; }
+  .footer-note .warn svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+
+  /* Chevron anim */
+  .chev { display: flex; align-items: center; justify-content: center; }
+  .chev svg { width: 20px; height: 20px; color: var(--text3); flex-shrink: 0; transition: transform .2s; }
+  .chev.open svg { transform: rotate(180deg); }
+  .chev-sm svg { width: 16px; height: 16px; }
+
+  /* Hidden toggle */
+  .hidden { display: none !important; }
+
+  /* p-tag badge inline */
+  .p-badge { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="app-wrap" id="app">
+  <!-- rendered by JS -->
+</div>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+const AGE_TIERS = [
+  { id:"y01", label:"0–1 yr", labelFull:"0–1 year", cn:"0–1年", height:"3–5尺", compost:{lo:2,hi:3}, granule:{lo:0.4,hi:0.6}, chem:{lo:0.2,hi:0.3}, bearing:false },
+  { id:"y12", label:"1–2 yr", labelFull:"1–2 years", cn:"1–2年", height:"6尺以上", compost:{lo:2,hi:3}, granule:{lo:0.4,hi:0.6}, chem:{lo:0.2,hi:0.3}, bearing:false },
+  { id:"y34", label:"3–4 yr", labelFull:"3–4 years", cn:"3–4年", height:"中型树", compost:{lo:6,hi:10}, granule:{lo:1.5,hi:1.8}, chem:{lo:0.6,hi:1.0}, bearing:false },
+  { id:"y5",  label:"5+ yr",  labelFull:"5+ years",  cn:"5年以上", height:"大型树", compost:{lo:10,hi:12.5}, granule:{lo:2.5,hi:4.0}, chem:{lo:1.0,hi:1.25}, bearing:true },
+  { id:"y10", label:"10+ yr", labelFull:"10+ years", cn:"10年以上", height:"成熟大树", compost:{lo:20,hi:25}, granule:{lo:5,hi:6.5}, chem:{lo:2.0,hi:2.5}, bearing:true },
+];
+
+const CLONES = [
+  { name:"Musang King", cn:"猫山王", code:"D197", daa:[85,95], conf:"high", confLabel:"High — peer-reviewed 高信度 (文献支持)", s:{veg:30,preflower:21,bloom:5,fruitset:10,cull1:15,cull2:20,expand:35,mature:20,postharvest:45} },
+  { name:"Black Thorn", cn:"黑刺", code:"D200", daa:[110,125], conf:"high", confLabel:"High — industry data 高信度 (行业数据)", s:{veg:35,preflower:25,bloom:5,fruitset:12,cull1:18,cull2:22,expand:45,mature:23,postharvest:50} },
+  { name:"Sultan / D24", cn:"苏丹", code:"D24", daa:[105,115], conf:"high", confLabel:"High — MARDI data 高信度 (MARDI数据)", s:{veg:30,preflower:21,bloom:5,fruitset:10,cull1:15,cull2:20,expand:40,mature:20,postharvest:45} },
+  { name:"IOI", cn:"", code:"D168", daa:[90,105], conf:"med", confLabel:"Medium — season window 中信度 (常规产季)", s:{veg:28,preflower:20,bloom:5,fruitset:10,cull1:14,cull2:18,expand:32,mature:21,postharvest:42} },
+  { name:"Red Prawn", cn:"红虾", code:"D175", daa:[90,105], conf:"med", confLabel:"Medium — season window 中信度 (常规产季)", s:{veg:28,preflower:20,bloom:5,fruitset:10,cull1:14,cull2:18,expand:30,mature:23,postharvest:40} },
+  { name:"Golden Phoenix", cn:"金凤", code:"D198", daa:[90,105], conf:"med", confLabel:"Medium — season window 中信度 (常规产季)", s:{veg:28,preflower:20,bloom:5,fruitset:9,cull1:13,cull2:18,expand:30,mature:25,postharvest:40} },
+  { name:"Tekka", cn:"竹脚", code:"D160", daa:[100,115], conf:"low", confLabel:"Low — estimated 低信度 (估算)", s:{veg:30,preflower:21,bloom:5,fruitset:10,cull1:14,cull2:20,expand:38,mature:23,postharvest:45} },
+  { name:"Tupai King", cn:"松鼠王", code:"D214", daa:[95,110], conf:"low", confLabel:"Low — estimated 低信度 (估算)", s:{veg:30,preflower:21,bloom:5,fruitset:10,cull1:15,cull2:20,expand:35,mature:20,postharvest:45} },
+  { name:"Monthong", cn:"金枕", code:"D159", daa:[115,134], conf:"high", confLabel:"High — peer-reviewed 高信度 (文献支持)", s:{veg:35,preflower:25,bloom:5,fruitset:12,cull1:18,cull2:22,expand:50,mature:27,postharvest:50} },
+  { name:"Kampung", cn:"甘榜", code:"–", daa:[90,130], conf:"low", confLabel:"Low — wide variation 低信度 (差异大)", s:{veg:30,preflower:21,bloom:5,fruitset:10,cull1:15,cull2:20,expand:35,mature:20,postharvest:45} },
+];
+
+const SM = [
+  { key:"veg",         name:"Vegetative",    cn:"营养生长期", phase:"Vegetative",   color:"#3B6D11" },
+  { key:"preflower",   name:"Pre-Flowering", cn:"催花期",    phase:"Induction",    color:"#BA7517" },
+  { key:"bloom",       name:"Full Bloom",    cn:"开花期",    phase:"Reproductive", color:"#D4537E" },
+  { key:"fruitset",    name:"Fruit Set",     cn:"坐果初期",  phase:"Fruit Dev.",   color:"#185FA5" },
+  { key:"cull1",       name:"1st Culling",   cn:"第一波落果", phase:"Thinning",    color:"#D85A30" },
+  { key:"cull2",       name:"2nd Culling",   cn:"第二波落果", phase:"Thinning",    color:"#D85A30" },
+  { key:"expand",      name:"Expansion",     cn:"膨果期",    phase:"Fruit Dev.",   color:"#1D9E75" },
+  { key:"mature",      name:"Maturation",    cn:"成熟落果",  phase:"Harvest",      color:"#639922" },
+  { key:"postharvest", name:"Post-harvest",  cn:"采收后恢复", phase:"Recovery",    color:"#0C447C" },
+];
+
+const TL = {
+  c:  { en:"Compost", cn:"堆肥" },
+  g:  { en:"Granule", cn:"粒肥" },
+  f:  { en:"Foliar",  cn:"叶面" },
+  ch: { en:"Chemical",cn:"化肥" },
+};
+const FOLIAR    = "1:500 dilution";
+const FOLIAR_CN = "1:500 倍稀释";
+
+// ─── HELPERS ────────────────────────────────────────────────────────────────
+function scaleFactor(tier) { const base=22.5; const mid=(tier.compost.lo+tier.compost.hi)/2; return mid/base; }
+function fmtDose(lo,hi,unit=" kg/tree") { return lo===hi?`${lo}${unit}`:`${lo}–${hi}${unit}`; }
+function scaleDose(bLo,bHi,tier) { const f=scaleFactor(tier); const lo=+(bLo*f).toFixed(1); const hi=+(bHi*f).toFixed(1); return lo===hi?`${lo} kg/tree`:`${lo}–${hi} kg/tree`; }
+function scaleGranule(bLo,bHi,tier) { const f=((tier.granule.lo+tier.granule.hi)/2)/5.75; const lo=+(bLo*f).toFixed(1); const hi=+(bHi*f).toFixed(1); return lo===hi?`${lo} kg/tree`:`${lo}–${hi} kg/tree`; }
+function scaleChem(bLo,bHi,tier) { const f=((tier.chem.lo+tier.chem.hi)/2)/2.25; const lo=+(bLo*f).toFixed(1); const hi=+(bHi*f).toFixed(1); return lo===hi?`${lo} kg/tree`:`${lo}–${hi} kg/tree`; }
+function addDays(d,n) { const r=new Date(d); r.setDate(r.getDate()+n); return r; }
+function fmtDate(d) { return d.toLocaleDateString("en-MY",{day:"numeric",month:"short",year:"numeric"}); }
+function fmtShort(d) { return d.toLocaleDateString("en-MY",{day:"numeric",month:"short"}); }
+function todayStr() { const t=new Date(); return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`; }
+
+function buildSD(tier) {
+  const c        = fmtDose(tier.compost.lo, tier.compost.hi);
+  const cSmall   = scaleDose(5,5,tier);
+  const cFruitset= scaleDose(25,25,tier);
+  const gLeafy   = fmtDose(tier.granule.lo, tier.granule.hi);
+  const gAmino   = scaleGranule(2.5,2.5,tier);
+  const gPhoskal = scaleGranule(2.5,2.5,tier);
+  const gMelon   = scaleGranule(6,6,tier);
+  const ch1515   = scaleChem(2.0,2.5,tier);
+  const ch1212   = scaleChem(2.5,2.5,tier);
+  const ch9618   = scaleChem(3.0,3.0,tier);
+  const treeCn   = "公斤/树";
+  const youngNote= !tier.bearing
+    ? "⚠️ Tree not yet at bearing age — flowering stages shown for planning only. Do not force induction before tree is ready (min. 5 years).\n⚠️ 树龄未达结果期——开花阶段仅供规划参考。未满5年前请勿强制催花。"
+    : "";
+
+  return {
+    veg: {
+      organic: [
+        {name:"Base Compost EXTRA",cn:"超级堆肥",dose:c,doseCn:treeCn,doseNote:"📖 Booklet p.9 table",freq:"Monthly (Rotation 1/3)",freqCn:"每月一次 (轮换 1/3)",tag:"c"},
+        {name:"Leafy & Growth Boosting (4-2-2)",cn:"叶青绿追肥",dose:gLeafy,doseCn:treeCn,doseNote:"📖 Booklet p.9 table",freq:"Monthly (Rotation 2/3)",freqCn:"每月一次 (轮换 2/3)",tag:"g"},
+        {name:"Natural Phoskal (1-10-10) + AminoLong N+",cn:"高磷钾肥 + 长效氮肥",dose:`${gPhoskal} + ${gAmino}`,doseCn:treeCn,doseNote:"Balanced growth rotation",freq:"Monthly (Rotation 3/3)",freqCn:"每月一次 (轮换 3/3)",tag:"g"},
+        {name:"Nitro+",cn:"氮素叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Top up on granular schedule",freq:"Every 2 weeks",freqCn:"每两周一次",tag:"f"},
+      ],
+      chem:[{name:"15-15-15 compound",cn:"复合化肥",dose:ch1515,doseCn:treeCn,doseNote:"📖 Booklet p.9 table",freq:"Replaces Rotation 3/3",freqCn:"替换轮换 3/3",tag:"ch"}],
+      skoNote:"SKO Rotation: Month 1 & 2 follow Organic schedule. Month 3 replaces [Natural Phoskal + AminoLong] with [15-15-15 Chemical]. Nitro+ remains bi-weekly.\nSKO轮换：第1和第2个月遵循有机方案。第3个月使用[15-15-15化肥]替换[高磷钾肥+长效氮肥]。Nitro+保持每两周一次。",
+      notes:"High-nitrogen vegetative phase. 3-month cycle build vigorous canopy. Nitro+ provides supplemental foliar nitrogen every 2 weeks.",
+      notesCn:"高氮营养生长阶段。三个月轮换周期建立强壮树冠。Nitro+每两周补充叶面氮肥。",
+      youngNote,
+    },
+    preflower: {
+      organic:[
+        {name:"Base Compost EXTRA",cn:"超级堆肥",dose:cSmall,doseCn:treeCn,doseNote:"Reduced dose — induction phase",freq:"Once at stage",freqCn:"本阶段一次",tag:"c"},
+        {name:"Natural Phoskal (1-10-10)",cn:"高磷钾肥",dose:gPhoskal,doseCn:treeCn,doseNote:"Scaled from 10 years 2.5kg",freq:"Once at stage",freqCn:"本阶段一次",tag:"g"},
+        {name:"Organic SP+",cn:"磷素叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Weekly",freqCn:"每周一次",tag:"f"},
+        {name:"K+",cn:"钾素叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Weekly",freqCn:"每周一次",tag:"f"},
+        {name:"CalMagBo+",cn:"钙镁硼叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Weekly",freqCn:"每周一次",tag:"f"},
+      ],
+      chem:[{name:"12-12-17",cn:"高钾化肥",dose:ch1212,doseCn:treeCn,doseNote:"Scaled from 10 years 2.5kg",freq:"Once at stage",freqCn:"本阶段一次",tag:"ch"}],
+      skoNote:"Integrated: Natural Phoskal (organic) OR 12-12-17 (chemical) — not both. Foliar products apply in both modes.\n综合方案：Natural Phoskal或12-12-17二选一。叶面肥两种方案均使用。",
+      notes:"Reduce nitrogen, elevate P+K to trigger flowering stress. Stop irrigation. Natural Phoskal (1-10-10) drives crab-eye bud initiation.",
+      notesCn:"减少氮肥，提高磷钾诱导开花应激。停止灌水。Natural Phoskal促进芽眼形成。",
+      youngNote,
+    },
+    bloom: {
+      organic:[
+        {name:"CalMagBo+",cn:"钙镁硼叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Every 2–3 days",freqCn:"每2-3天一次",tag:"f"},
+        {name:"K+",cn:"钾素叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Every 2–3 days",freqCn:"每2-3天一次",tag:"f"},
+      ],
+      chem:[],
+      skoNote:"No chemical fertilizers during open bloom in either mode — only organic foliar.\n两种方案开花期间均不施化肥，仅有机叶面肥。",
+      notes:"No granular applications during open bloom. No pesticides — protect nocturnal pollinators.",
+      notesCn:"开花期间不施粒状肥料。不用农药——保护夜间授粉者。",
+      youngNote,
+    },
+    fruitset: {
+      organic:[
+        {name:"Base Compost EXTRA",cn:"超级堆肥",dose:cFruitset,doseCn:treeCn,doseNote:"📖 Booklet p.10: 25kg at 10 years",freq:"Once at fruit set",freqCn:"坐果期一次",tag:"c"},
+        {name:"CalMagBo+",cn:"钙镁硼叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Twice weekly",freqCn:"每周两次",tag:"f"},
+        {name:"K+",cn:"钾素叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Twice weekly",freqCn:"每周两次",tag:"f"},
+      ],
+      chem:[{name:"12-12-17",cn:"复合化肥",dose:ch1212,doseCn:treeCn,doseNote:"Scaled from 10 years 2.5kg",freq:"Alternate with organic",freqCn:"与有机交替",tag:"ch"}],
+      skoNote:"Integrated: Base Compost EXTRA (organic) OR 12-12-17 (chemical) — alternate. CalMagBo+ & K+ foliar both modes.\n综合方案：超级堆肥或化肥交替，不同时施用。叶面肥两种方案均使用。",
+      notes:"First 10 days after anthesis are decisive. Resume Base Compost EXTRA immediately to restore soil nutrients.",
+      notesCn:"坐果后10天至关重要。立即恢复施用超级堆肥补充养分。",
+      youngNote:"",
+    },
+    cull1: {
+      organic:[
+        {name:"Melon & Cucurbit Boosting (3-2-5)",cn:"膨果追肥",dose:gMelon,doseCn:treeCn,doseNote:"📖 Booklet p.10: 6kg at 10 years",freq:"Once at stage",freqCn:"本阶段一次",tag:"g"},
+        {name:"CalMagBo+",cn:"钙镁硼叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Twice weekly",freqCn:"每周两次",tag:"f"},
+        {name:"K+",cn:"钾素叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Twice weekly",freqCn:"每周两次",tag:"f"},
+      ],
+      chem:[{name:"9-6-18",cn:"高钾化肥",dose:ch9618,doseCn:treeCn,doseNote:"Scaled from 10 years 3kg",freq:"Alternate with organic",freqCn:"与有机交替",tag:"ch"}],
+      skoNote:"Integrated: Melon & Cucurbit Boosting (organic) OR 9-6-18 (chemical) on alternate applications.\n综合方案：膨果追肥或9-6-18交替施用。",
+      notes:"Tree naturally drops under-fertilised fruits (10–25 DAA). Higher-K granule supports surviving fruits.",
+      notesCn:"树体自然淘汰发育不良的幼果（10–25 DAA）。高钾粒肥支持留果。",
+      youngNote:"",
+    },
+    cull2: {
+      organic:[
+        {name:"Melon & Cucurbit Boosting (3-2-5)",cn:"膨果追肥",dose:gMelon,doseCn:treeCn,doseNote:"📖 Booklet p.10: 6kg at 10 years",freq:"Once at stage",freqCn:"本阶段一次",tag:"g"},
+        {name:"Nitro K+",cn:"氮钾叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Weekly",freqCn:"每周一次",tag:"f"},
+        {name:"CalMagBo+",cn:"钙镁硼叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Weekly",freqCn:"每周一次",tag:"f"},
+      ],
+      chem:[{name:"9-6-18",cn:"高钾化肥",dose:ch9618,doseCn:treeCn,doseNote:"Scaled from 10 years 3kg",freq:"Alternate with organic",freqCn:"与有机交替",tag:"ch"}],
+      skoNote:"Integrated: alternate Melon & Cucurbit Boosting (organic) and 9-6-18 (chemical). Avoid high-N granules.\n综合方案：膨果追肥或9-6-18交替。避免高氮粒肥。",
+      notes:"New flush competes with developing fruits (35–50 DAA). Avoid high-nitrogen granules.",
+      notesCn:"新叶芽（35–50 DAA）与果实竞争养分。避免高氮粒肥。",
+      youngNote:"",
+    },
+    expand: {
+      organic:[
+        {name:"Melon & Cucurbit Boosting (3-2-5)",cn:"膨果追肥",dose:gMelon,doseCn:treeCn,doseNote:"📖 Booklet p.10: 6kg at 10 years",freq:"Every 3–4 weeks",freqCn:"每3-4周一次",tag:"g"},
+        {name:"Base Compost EXTRA",cn:"超级堆肥",dose:"Moisture buffer — as needed",doseCn:"视情况补水",doseNote:"Moisture management",freq:"As needed",freqCn:"视情况",tag:"c"},
+        {name:"K+",cn:"钾素叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Weekly",freqCn:"每周一次",tag:"f"},
+        {name:"CalMagBo+",cn:"钙镁硼叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Weekly",freqCn:"每周一次",tag:"f"},
+        {name:"Nitro K+",cn:"氮钾叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Weekly",freqCn:"每周一次",tag:"f"},
+      ],
+      chem:[{name:"9-6-18",cn:"高钾化肥",dose:ch9618,doseCn:treeCn,doseNote:"Scaled from 10 years 3kg",freq:"Alternate cycles with organic",freqCn:"与有机轮换",tag:"ch"}],
+      skoNote:"Integrated: alternate Melon & Cucurbit Boosting (organic) and 9-6-18 (chemical) each cycle.\n综合方案：膨果追肥与9-6-18交替施用。",
+      notes:"Maximum cell expansion — potassium drives fruit sizing. Consistent irrigation critical; irregular water causes cracking.",
+      notesCn:"细胞最大扩张阶段——钾素驱动果实增大。保持均匀灌溉，灌水不均会导致裂果。",
+      youngNote:"",
+    },
+    mature: {
+      organic:[
+        {name:"K+",cn:"钾素叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Weekly",freqCn:"每周一次",tag:"f"},
+        {name:"Nitro K+",cn:"氮钾叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Weekly",freqCn:"每周一次",tag:"f"},
+      ],
+      chem:[],
+      skoNote:"STOP all granular fertilizers 3 weeks before harvest in both modes. Foliar only.\n两种方案均于采收前3周停止所有粒肥，仅使用叶面肥。",
+      notes:"Stop ALL granular fertilizers 3 weeks before harvest. Reduce irrigation gradually. No high-nitrogen.",
+      notesCn:"采收前3周停止所有粒状肥料。逐步减少灌水。不施高氮肥。",
+      youngNote:"",
+    },
+    postharvest: {
+      organic:[
+        {name:"Base Compost EXTRA",cn:"超级堆肥",dose:c,doseCn:treeCn,doseNote:"📖 Booklet p.9 table",freq:"Immediately post-harvest",freqCn:"采收后立即",tag:"c"},
+        {name:"Leafy & Growth Boosting (4-2-2)",cn:"叶青绿追肥",dose:gLeafy,doseCn:treeCn,doseNote:"📖 Booklet p.9 table",freq:"Monthly",freqCn:"每月一次",tag:"g"},
+        {name:"AminoLong N+ (12-1-1)",cn:"长效氮肥",dose:gAmino,doseCn:treeCn,doseNote:"Scaled from 10 years 2.5kg",freq:"Monthly",freqCn:"每月一次",tag:"g"},
+        {name:"Nitro+",cn:"氮素叶面肥",dose:FOLIAR,doseCn:FOLIAR_CN,doseNote:"Dilution ratio unchanged",freq:"Every 2 weeks",freqCn:"每两周一次",tag:"f"},
+      ],
+      chem:[{name:"15-15-15 compound",cn:"复合化肥",dose:ch1515,doseCn:treeCn,doseNote:"📖 Booklet p.9 table",freq:"Alternate months",freqCn:"隔月一次",tag:"ch"}],
+      skoNote:"Best time to start SKO if switching from full-chemical. Month 1 organic, Month 2 chemical (15-15-15), alternate until next induction.\n从全化肥转为SKO的理想时机。有机与化肥交替，直至下次催花。",
+      notes:"Tree is exhausted. Rapid restoration of organic matter and nitrogen is critical for the next flush cycle.",
+      notesCn:"采收后树体耗尽。快速补充有机质和氮素对下一轮催花至关重要。",
+      youngNote:"",
+    },
+  };
+}
+
+function buildDateRanges(todayDate, clone, stageIdx) {
+  const today = new Date(todayDate);
+  const keys  = SM.map(x => x.key);
+  const ranges = {};
+  let ptr = new Date(today);
+  for (let i = stageIdx; i < keys.length; i++) {
+    ranges[keys[i]] = { start: new Date(ptr), end: addDays(ptr, clone.s[keys[i]] - 1) };
+    ptr = addDays(ptr, clone.s[keys[i]]);
+  }
+  ptr = new Date(today);
+  for (let i = stageIdx - 1; i >= 0; i--) {
+    const de = addDays(ptr, -1);
+    const ds = addDays(ptr, -clone.s[keys[i]]);
+    ranges[keys[i]] = { start: ds, end: de };
+    ptr = new Date(ds);
+  }
+  return ranges;
+}
+
+function buildShopList(SD, stageIdx, mode) {
+  const keys = SM.map(x => x.key);
+  const prods = {};
+  keys.slice(stageIdx).forEach(k => {
+    const sd = SD[k];
+    const stageObj = SM.find(x => x.key === k);
+    const stageNum = SM.findIndex(x => x.key === k) + 1;
+    sd.organic.forEach(p => {
+      if (!prods[p.name]) prods[p.name] = { ...p, stages:[], type:"org" };
+      prods[p.name].stages.push({ en:stageObj.name, cn:stageObj.cn, num:stageNum, color:stageObj.color });
+    });
+    if (mode === "integrated" && sd.chem) {
+      sd.chem.forEach(p => {
+        if (!prods[p.name]) prods[p.name] = { ...p, stages:[], type:"chem" };
+        prods[p.name].stages.push({ en:stageObj.name, cn:stageObj.cn, num:stageNum, color:stageObj.color });
+      });
+    }
+  });
+  return Object.values(prods);
+}
+
+// ─── STATE ──────────────────────────────────────────────────────────────────
+const state = {
+  cloneIdx: 0,
+  todayDate: todayStr(),
+  mode: "organic",
+  ageIdx: 4,
+  stageIdx: 0,
+  openStages: { 0: true },
+  showPast: false,
+  showFuture: false,
+};
+
+// ─── RENDER HELPERS ─────────────────────────────────────────────────────────
+function svgIcon(name, cls="") {
+  // We'll use lucide inline SVGs via a data lookup
+  return `<span class="icon-wrap ${cls}" data-lucide="${name}"></span>`;
+}
+
+function tagClass(tag) {
+  return { c:"tag-c", g:"tag-g", f:"tag-f", ch:"tag-ch" }[tag] || "tag-g";
+}
+
+function prodChipHTML(p, isChem) {
+  const tag = isChem ? "ch" : p.tag;
+  return `
+    <div class="prod-chip ${isChem?"chem":""}">
+      <div class="chip-top">
+        <div>
+          <div class="chip-name">${p.name}</div>
+          ${p.cn ? `<div class="chip-cn">${p.cn}</div>` : ""}
+        </div>
+        <span class="chip-tag ${tagClass(tag)}">${TL[tag].en} ${TL[tag].cn}</span>
+      </div>
+      <div class="chip-dose">
+        <span class="chip-dose-val">${p.dose}</span>
+        ${p.doseCn ? `<span class="chip-dose-cn">${p.doseCn}</span>` : ""}
+        ${p.doseNote ? `<span class="chip-dose-note">${p.doseNote}</span>` : ""}
+      </div>
+      <div class="chip-freq">
+        <span class="icon-wrap" data-lucide="calendar" style="display:flex;align-items:center;color:var(--text3)"></span>
+        <div>
+          <div class="chip-freq-text">${p.freq}</div>
+          <div class="chip-freq-cn">${p.freqCn}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function stageAccHTML(sm, i, stageIdx, dr, SD, mode) {
+  const d = dr[sm.key];
+  const dur = CLONES[state.cloneIdx].s[sm.key];
+  const isPast = i < stageIdx;
+  const isCurrent = i === stageIdx;
+  const isOpen = !!state.openStages[i];
+  const sd = SD[sm.key];
+  const hasChem = sd.chem && sd.chem.length > 0;
+
+  const borderStyle = isCurrent ? `style="border-color:${sm.color}"` : "";
+  const borderClass = isCurrent ? "current" : "";
+
+  const bodyHTML = (() => {
+    if (!isOpen) return "";
+    const pastNotice = isPast
+      ? `<div class="past-notice">✓ This stage has already passed · 此阶段已过</div>`
+      : "";
+    let inner = "";
+    if (mode === "organic") {
+      inner = `
+        <div class="body-section org">
+          <div class="section-badge badge-org">🌿 Organic 纯有机</div>
+          <div class="prod-grid mb-3">
+            ${sd.organic.map(p => prodChipHTML(p, false)).join("")}
+          </div>
+          <div class="notes-box">
+            ${sd.youngNote || sd.notes}
+            ${(!sd.youngNote && sd.notesCn) ? `<div class="cn">${sd.notesCn}</div>` : ""}
+          </div>
+        </div>`;
+    } else {
+      inner = `
+        <div class="body-section sko">
+          <div class="section-badge badge-sko">⚗️ Integrated SKO</div>
+          <div class="sko-rotation"><b>⟳ Rotation Rules 轮换规则:</b>${sd.skoNote}</div>
+          <div class="sub-section-label sub-org-label">🌿 Organic 有机</div>
+          <div class="prod-grid mb-3">
+            ${sd.organic.map(p => prodChipHTML(p, false)).join("")}
+          </div>
+          ${hasChem ? `
+            <div class="sub-section-label sub-chem-label">⚗️ Chemical 化肥</div>
+            <div class="prod-grid mb-3">
+              ${sd.chem.map(p => prodChipHTML(p, true)).join("")}
+            </div>
+          ` : ""}
+          <div class="notes-box" style="margin-top:12px">
+            ${sd.youngNote || sd.notes}
+            ${(!sd.youngNote && sd.notesCn) ? `<div class="cn">${sd.notesCn}</div>` : ""}
+          </div>
+        </div>`;
+    }
+    return `<div class="stage-body">${pastNotice}${inner}</div>`;
+  })();
+
+  return `
+    <div class="stage-acc ${borderClass}" ${borderStyle} data-stage-id="${i}">
+      <button class="stage-acc-btn" onclick="toggleStage(${i})">
+        <div class="stage-badge" style="background:${sm.color}22;color:${sm.color}">${i+1}</div>
+        <div class="stage-acc-info">
+          <div class="stage-acc-name">
+            <span>${sm.name}</span>
+            <span style="color:var(--text2)">${sm.cn}</span>
+            ${isCurrent ? `<span class="pill-now">Now 目前</span>` : ""}
+            ${isPast ? `<span class="pill-past">Past 已过</span>` : ""}
+          </div>
+          <div class="stage-acc-phase">${sm.phase}</div>
+        </div>
+        <div class="stage-acc-dates">
+          <div class="stage-date-val">${fmtShort(d.start)}</div>
+          <div class="stage-date-val">${fmtShort(d.end)}</div>
+          <div class="stage-dur">${dur}d</div>
+        </div>
+        <div class="chev chev-sm ${isOpen?"open":""}">
+          <span data-lucide="chevron-down"></span>
+        </div>
+      </button>
+      ${bodyHTML}
+    </div>`;
+}
+
+// ─── MAIN RENDER ─────────────────────────────────────────────────────────────
+function render() {
+  const clone  = CLONES[state.cloneIdx];
+  const tier   = AGE_TIERS[state.ageIdx];
+  const SD     = buildSD(tier);
+  const dr     = buildDateRanges(state.todayDate, clone, state.stageIdx);
+  const shopProds = buildShopList(SD, state.stageIdx, state.mode);
+  const harvestDr = dr["mature"];
+  const today = new Date(state.todayDate);
+  const daysToHarvest = Math.round((harvestDr.start - today) / (1000*60*60*24));
+  const currentSM = SM[state.stageIdx];
+
+  // ── Past / current / future split ──
+  const pastStages   = SM.filter((_,i) => i < state.stageIdx);
+  const futureStages = SM.filter((_,i) => i > state.stageIdx);
+
+  // ── Banner ──
+  let bannerHTML = "";
+  if (!tier.bearing) {
+    bannerHTML = `
+      <div class="banner banner-amber mb-6">
+        <span data-lucide="alert-triangle" style="color:#b45309"></span>
+        <div>
+          <div class="banner-title">Tree not yet at bearing age (${tier.labelFull} · ${tier.cn})</div>
+          <div class="banner-body">Doses shown are for vegetative growth. Do not force flowering before 5 years (trunk ≥15 cm).</div>
+          <div class="banner-body banner-sep">所示用量用于营养生长。未满5年（树干直径≥15厘米）请勿强制催花。</div>
+        </div>
+      </div>`;
+  } else if (state.stageIdx < 8) {
+    bannerHTML = `
+      <div class="banner banner-green mb-6">
+        <div>
+          <div class="banner-title">🍈 Est. harvest: ${fmtDate(harvestDr.start)} – ${fmtDate(harvestDr.end)}</div>
+          <div class="banner-body">${clone.name} ${clone.cn} · ${clone.daa[0]}–${clone.daa[1]} DAA</div>
+          <div class="banner-body" style="margin-top:4px">${daysToHarvest > 0 ? `~${daysToHarvest} days / 约${daysToHarvest}天` : "Harvest window may have passed / 采收期可能已过"}</div>
+          <div class="banner-body" style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(6,95,70,.2);font-size:12px;opacity:.8">${clone.confLabel}</div>
+        </div>
+      </div>`;
+  }
+
+  // ── Accordions ──
+  let accordionHTML = `<div class="acc-wrapper">`;
+
+  // Past group
+  if (pastStages.length > 0) {
+    accordionHTML += `
+      <div class="acc-group acc-group-past">
+        <button class="acc-group-btn" onclick="togglePast()">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="acc-group-icon icon-past"><span data-lucide="archive"></span></div>
+            <div>
+              <div class="acc-group-title acc-past-title">Past Stages · 已过阶段</div>
+              <div class="acc-group-sub acc-past-title">${pastStages.length} stages neatly folded</div>
+            </div>
+          </div>
+          <div class="chev ${state.showPast?"open":""}"><span data-lucide="chevron-down"></span></div>
+        </button>
+        ${state.showPast ? `
+          <div class="acc-group-content">
+            <div class="mt3">
+              ${pastStages.map((sm, i) => stageAccHTML(sm, i, state.stageIdx, dr, SD, state.mode)).join("")}
+            </div>
+          </div>` : ""}
+      </div>`;
+  }
+
+  // Current
+  accordionHTML += stageAccHTML(currentSM, state.stageIdx, state.stageIdx, dr, SD, state.mode);
+
+  // Future group
+  if (futureStages.length > 0) {
+    accordionHTML += `
+      <div class="acc-group acc-group-future">
+        <button class="acc-group-btn" onclick="toggleFuture()">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="acc-group-icon icon-future"><span data-lucide="clock"></span></div>
+            <div>
+              <div class="acc-group-title acc-future-title">Upcoming Stages · 即将到来的阶段</div>
+              <div class="acc-group-sub acc-future-sub">${futureStages.length} stages neatly folded</div>
+            </div>
+          </div>
+          <div class="chev ${state.showFuture?"open":""}"><span data-lucide="chevron-down"></span></div>
+        </button>
+        ${state.showFuture ? `
+          <div class="acc-group-content">
+            <div class="mt3">
+              ${futureStages.map((sm, i) => stageAccHTML(sm, i + state.stageIdx + 1, state.stageIdx, dr, SD, state.mode)).join("")}
+            </div>
+          </div>` : ""}
+      </div>`;
+  }
+
+  accordionHTML += `</div>`;
+
+  // ── Shopping list ──
+  const shopTableRows = shopProds.map(p => {
+    const tKey = p.type === "chem" ? "ch" : p.tag;
+    return `
+      <tr>
+        <td><span class="chip-tag ${tagClass(tKey)}">${TL[tKey].en} ${TL[tKey].cn}</span></td>
+        <td><div class="shop-td-name">${p.name}</div>${p.cn ? `<div class="shop-td-cn">${p.cn}</div>` : ""}</td>
+        <td><div class="shop-td-dose">${p.dose}</div>${p.doseCn ? `<div style="font-size:11px;color:var(--green);opacity:.8;font-weight:700;margin-top:2px">${p.doseCn}</div>` : ""}</td>
+        <td>${p.stages.map(stg => `
+          <div class="shop-stg-row">
+            <span class="shop-stg-num" style="background:${stg.color}">${stg.num}</span>
+            <span class="shop-stg-name">${stg.en} · ${stg.cn}</span>
+          </div>`).join("")}</td>
+      </tr>`;
+  }).join("");
+
+  const shopCards = shopProds.map(p => {
+    const tKey = p.type === "chem" ? "ch" : p.tag;
+    return `
+      <div class="shop-card">
+        <div class="shop-card-top">
+          <div>
+            <div class="shop-card-name">${p.name}</div>
+            ${p.cn ? `<div class="shop-card-cn">${p.cn}</div>` : ""}
+          </div>
+          <span class="chip-tag ${tagClass(tKey)}">${TL[tKey].en} ${TL[tKey].cn}</span>
+        </div>
+        <div class="shop-card-dose">${p.dose}${p.doseCn ? ` <span style="font-size:12px;opacity:.8">${p.doseCn}</span>` : ""}</div>
+        <div class="shop-card-stages">
+          ${p.stages.map(stg => `<span class="shop-stage-pill" style="background:${stg.color}">${stg.num} · ${stg.en} ${stg.cn}</span>`).join("")}
+        </div>
+      </div>`;
+  }).join("");
+
+  const metric4 = state.stageIdx < 7
+    ? `<div class="metric-card">
+        <div class="metric-label">Harvest 预计收成</div>
+        <div class="metric-val">${fmtShort(harvestDr.start)} – ${fmtShort(harvestDr.end)}</div>
+        <div class="metric-sub">${daysToHarvest > 0 ? `~${daysToHarvest}d 约${daysToHarvest}天` : "Passed 已过"}</div>
+       </div>`
+    : `<div class="metric-card">
+        <div class="metric-label">Mode 方式</div>
+        <div class="metric-val">${state.mode === "organic" ? "🌿 Organic" : "⚗️ SKO"}</div>
+       </div>`;
+
+  // ── Full HTML ──
+  document.getElementById("app").innerHTML = `
+    <!-- HEADER -->
+    <div class="header mb-6">
+      <h2>Fertilizer Planner · 肥培管理</h2>
+      <p>Doses auto-scale to tree age · 用量按树龄自动换算</p>
+    </div>
+
+    <!-- PRIMARY CONTROLS -->
+    <div class="ctrl-row mb-5">
+      <div>
+        <span class="label-xs">Clone 品种</span>
+        <div class="select-wrap">
+          <select onchange="setClone(this.value)">
+            ${CLONES.map((c,i) => `<option value="${i}" ${i===state.cloneIdx?"selected":""}>${c.name} ${c.cn}</option>`).join("")}
+          </select>
+        </div>
+      </div>
+      <div>
+        <span class="label-xs">Date 日期</span>
+        <input type="date" value="${state.todayDate}" onchange="setDate(this.value)" />
+      </div>
+      <div class="ctrl-mode">
+        <span class="label-xs">Mode 施肥方式</span>
+        <div class="mode-toggle">
+          <button class="mode-btn ${state.mode==="organic"?"active-org":""}" onclick="setMode('organic')">
+            <span data-lucide="leaf"></span> Organic 有机
+          </button>
+          <button class="mode-btn ${state.mode==="integrated"?"active-sko":""}" onclick="setMode('integrated')">
+            <span data-lucide="flask-conical"></span> SKO 综合
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- AGE SELECTOR -->
+    <div class="mb-6">
+      <span class="label-xs" style="display:flex;align-items:center;gap:8px">
+        Tree Age 树龄 <span class="p-badge">📖 p.9</span>
+      </span>
+      <div class="grid-5 mb-3">
+        ${AGE_TIERS.map((a,i) => `
+          <button class="age-btn ${i===state.ageIdx?"active":""}" onclick="setAge(${i})">
+            <span class="a-label">${a.label}</span>
+            <span class="a-cn">${a.cn}</span>
+          </button>`).join("")}
+      </div>
+      <div class="age-info">
+        <span data-lucide="sprout"></span>
+        <span>${tier.labelFull} · ${tier.cn} · ${tier.height}</span>
+        <span style="font-size:12px">Compost: ${tier.compost.lo}–${tier.compost.hi}kg · Granule: ${tier.granule.lo}–${tier.granule.hi}kg · Chemical: ${tier.chem.lo}–${tier.chem.hi}kg</span>
+        ${!tier.bearing ? `<span style="color:var(--orange);display:flex;align-items:center;gap:4px"><span data-lucide="alert-triangle" style="width:16px;height:16px"></span> Not yet bearing</span>` : ""}
+      </div>
+    </div>
+
+    <!-- STAGE PICKER -->
+    <div class="mb-6">
+      <span class="label-xs">Current Stage 目前阶段</span>
+      <div class="grid-9">
+        ${SM.map((sm,i) => `
+          <button class="stage-btn ${i===state.stageIdx?"s-active":""}"
+            style="${i===state.stageIdx?`background:${sm.color};border-color:${sm.color};color:#fff`:""}"
+            onclick="pickStage(${i})">
+            <span class="stage-num"
+              style="${i===state.stageIdx?`background:#fff;color:${sm.color}`:`background:${sm.color};color:#fff`}">
+              ${i+1}
+            </span>
+            <span class="s-name">${sm.name}</span>
+            <span class="s-cn">${sm.cn}</span>
+          </button>`).join("")}
+      </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="grid-4m mb-6">
+      <div class="metric-card">
+        <div class="metric-label">Clone 品种</div>
+        <div class="metric-val">${clone.name}</div>
+        <div class="metric-sub">${clone.code}</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Tree Age 树龄</div>
+        <div class="metric-val" style="color:#78350f">${tier.labelFull}</div>
+        <div class="metric-sub">${tier.cn}</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Stage 阶段</div>
+        <div class="metric-val" style="color:${currentSM.color};font-size:13px">${currentSM.name}</div>
+        <div class="metric-sub">${currentSM.cn}</div>
+      </div>
+      ${metric4}
+    </div>
+
+    <!-- BANNER -->
+    ${bannerHTML}
+
+    <!-- ACCORDIONS -->
+    ${accordionHTML}
+
+    <!-- SHOPPING LIST -->
+    <div class="shop-section">
+      <div class="shop-title">
+        <span data-lucide="shopping-cart"></span>
+        Products needed from now · 从现在起所需产品
+      </div>
+      <div class="shop-table-wrap">
+        <table class="shop-table">
+          <thead>
+            <tr>
+              <th style="width:110px">TYPE 种类</th>
+              <th>PRODUCT 产品</th>
+              <th style="width:160px">DOSE 用量</th>
+              <th>STAGES 阶段</th>
+            </tr>
+          </thead>
+          <tbody>${shopTableRows}</tbody>
+        </table>
+      </div>
+      <div class="shop-cards">${shopCards}</div>
+      <div class="footer-note mt-5">
+        📖 Doses from Mr. Ganick booklet p.9. Foliar dilution (1:500) unchanged across all ages.
+        <span class="cn">用量源自有机先生指南第9页。叶面肥稀释比例（1:500）在所有树龄均保持不变。</span>
+        ${clone.conf !== "high" ? `
+          <div class="warn">
+            <span data-lucide="alert-triangle"></span>
+            <span>${clone.name} timing estimated — verify with agronomist. 该品种时间仅供参考，请向农学家核实。</span>
+          </div>` : ""}
+      </div>
+    </div>
+  `;
+
+  // Render Lucide icons
+  if (window.lucide) lucide.createIcons();
+}
+
+// ─── HANDLERS ────────────────────────────────────────────────────────────────
+function setClone(v) { state.cloneIdx = Number(v); render(); }
+function setDate(v)  { state.todayDate = v; render(); }
+function setMode(m)  { state.mode = m; render(); }
+function setAge(i)   { state.ageIdx = i; render(); }
+function pickStage(i) {
+  state.stageIdx = i;
+  state.openStages = { [i]: true };
+  state.showPast = false;
+  state.showFuture = false;
+  render();
+}
+function toggleStage(i) {
+  state.openStages[i] = !state.openStages[i];
+  render();
+}
+function togglePast()   { state.showPast   = !state.showPast;   render(); }
+function toggleFuture() { state.showFuture = !state.showFuture; render(); }
+
+// ─── INIT ─────────────────────────────────────────────────────────────────
+render();
+
+// ─── PWA · SERVICE WORKER ────────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(reg => console.log('[PWA] Service worker registered:', reg.scope))
+      .catch(err => console.warn('[PWA] Service worker registration failed:', err));
+  });
+}
+</script>
+</body>
+</html>
