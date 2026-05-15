@@ -1,10 +1,12 @@
 // Fertilizer Planner · Service Worker
 // Bump CACHE_VERSION whenever the app shell changes to force an update.
-const CACHE_VERSION = 'v1.2.0';
+const CACHE_VERSION = 'v1.3.0';
 const CACHE_NAME = `fert-planner-${CACHE_VERSION}`;
 
 // App shell — relative paths so it works at any GitHub Pages sub-path.
 // All assets are now same-origin (no CDN), so first launch works fully offline.
+// Note: guide.pdf and qr-app-url.png are NOT pre-cached (bandwidth) — they're
+// cached on demand by the runtime fetch handler when first accessed.
 const APP_SHELL = [
   './',
   './index.html',
