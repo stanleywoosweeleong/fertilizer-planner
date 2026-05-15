@@ -199,7 +199,7 @@
   font-weight: 100 900;
   src: url('./files/noto-sans-sc-114-wght-normal.woff2') format('woff2-variations'),
        url('./files/noto-sans-sc-114-wght-normal.woff2') format('woff2');
-  unicode-range: U+4e45,U+4e5d,U+4e89,U+505c,U+519c,U+51cf,U+57f9,U+591c,U+5b63,U+5dee,U+5e55,U+5e8f,U+5f02,U+65bd,U+665a,U+6728,U+677e,U+68c0,U+699c,U+6ce2,U+6d4f,U+6fc0,U+7565,U+7c89,U+7eaf,U+7eff,U+82cf,U+836f,U+8865,U+8ffd,U+9047,U+987e;
+  unicode-range: U+4e45,U+4e5d,U+4e89,U+505c,U+519c,U+51cf,U+57f9,U+591c,U+5b63,U+5dee,U+5e55,U+5e8f,U+5f02,U+63cf,U+65bd,U+665a,U+6728,U+677e,U+68c0,U+699c,U+6ce2,U+6d4f,U+6fc0,U+7565,U+7c89,U+7eaf,U+7eff,U+82cf,U+836f,U+8865,U+8f93,U+8ffd,U+9047,U+987e;
 }
 
 @font-face {
@@ -209,7 +209,7 @@
   font-weight: 100 900;
   src: url('./files/noto-sans-sc-115-wght-normal.woff2') format('woff2-variations'),
        url('./files/noto-sans-sc-115-wght-normal.woff2') format('woff2');
-  unicode-range: U+4ec5,U+4efd,U+4f8b,U+4fbf,U+5145,U+517b,U+51b5,U+5207,U+5212,U+5219,U+521d,U+52bf,U+5347,U+54a8,U+54ea,U+5747,U+589e,U+5c1a,U+5c3d,U+5e72,U+5e95,U+62c9,U+6309,U+666e,U+6838,U+6b62,U+6bb5,U+6e29,U+6ee1,U+72b6,U+7387,U+773c,U+79bb,U+79fb,U+7b97,U+7c73,U+7d20,U+7efc,U+826f,U+843d,U+89d2,U+8bc9,U+8be6,U+8d26,U+9519,U+95ed,U+961f,U+9876,U+9884,U+9ec4;
+  unicode-range: U+4ec5,U+4efd,U+4f8b,U+4fbf,U+5145,U+517b,U+51b5,U+5207,U+5212,U+5219,U+521d,U+52bf,U+5347,U+54a8,U+54ea,U+5747,U+589e,U+5c1a,U+5c3d,U+5e72,U+5e95,U+626b,U+62c9,U+6309,U+666e,U+6838,U+6b62,U+6bb5,U+6e29,U+6ee1,U+72b6,U+7387,U+773c,U+79bb,U+79fb,U+7b97,U+7c73,U+7d20,U+7efc,U+826f,U+843d,U+89d2,U+8bc9,U+8be6,U+8d26,U+9519,U+95ed,U+961f,U+9876,U+9884,U+9ec4;
 }
 
 @font-face {
@@ -219,7 +219,7 @@
   font-weight: 100 900;
   src: url('./files/noto-sans-sc-116-wght-normal.woff2') format('woff2-variations'),
        url('./files/noto-sans-sc-116-wght-normal.woff2') format('woff2');
-  unicode-range: U+4e94,U+4ec0,U+4eca,U+4f46,U+4f4e,U+4f9b,U+4fee,U+503c,U+50cf,U+5148,U+518d,U+51c6,U+51e0,U+5217,U+5361,U+5386,U+53c2,U+53d8,U+5404,U+5411,U+5468,U+5668,U+56e2,U+56ed,U+5740,U+57fa,U+5904,U+59cb,U+5b58,U+5c71,U+5e08,U+5e26,U+5f20,U+5f3a,U+5f62,U+5f88,U+628a,U+62a4,U+62e9,U+6307,U+6362,U+636e,U+6539,U+6548,U+6574,U+663e,U+672a,U+6b65,U+6bcf,U+738b,U+7559,U+786e,U+7b7e,U+7ea2,U+7ea6,U+7ec6,U+7edc,U+8003,U+80b2,U+81f3-81f4,U+827a,U+82f1,U+8425,U+89c8,U+8be2,U+8be5,U+8bed,U+8c03,U+8fbe,U+8fde,U+901f,U+914d,U+91c7,U+9605,U+9664,U+9700,U+9752,U+9879,U+9ed1;
+  unicode-range: U+4e94,U+4ec0,U+4eca,U+4f46,U+4f4e,U+4f9b,U+4fee,U+503c,U+50cf,U+5148,U+518d,U+51c6,U+51e0,U+5217,U+5361,U+5386,U+53c2,U+53d8,U+5404,U+5411,U+5468,U+5668,U+56e2,U+56ed,U+5740,U+57fa,U+5904,U+59cb,U+5b58,U+5c71,U+5e08,U+5e26,U+5f20,U+5f3a,U+5f62,U+5f88,U+628a,U+62a4,U+62e9,U+6307,U+6362,U+636e,U+6539,U+6548,U+6574,U+663e,U+672a,U+6b65,U+6bcf,U+738b,U+7559,U+786e,U+7b7e,U+7ea2,U+7ea6,U+7ec6,U+7edc,U+7ef4,U+8003,U+80b2,U+81f3-81f4,U+827a,U+82f1,U+8425,U+89c8,U+8be2,U+8be5,U+8bed,U+8c03,U+8fbe,U+8fde,U+901f,U+914d,U+91c7,U+9605,U+9664,U+9700,U+9752,U+9879,U+9ed1;
 }
 
 @font-face {
@@ -229,7 +229,7 @@
   font-weight: 100 900;
   src: url('./files/noto-sans-sc-117-wght-normal.woff2') format('woff2-variations'),
        url('./files/noto-sans-sc-117-wght-normal.woff2') format('woff2');
-  unicode-range: U+4e24,U+4e3e,U+4e48,U+4e5f,U+4e8c,U+4ea4,U+4eab,U+4ece,U+4ed6,U+4efb,U+4f55,U+4f7f,U+4fdd,U+514d,U+5177,U+518c,U+51fb,U+522b,U+52a9,U+5305,U+5355,U+5357,U+5373,U+53bb,U+5458,U+56db,U+573a,U+578b,U+590d,U+5934,U+5b8c,U+5b98,U+5bfc,U+5c06,U+5c11,U+5df2,U+5e38,U+5e76,U+5e94,U+5efa,U+5feb,U+60f3,U+6216,U+6253,U+6301,U+652f,U+6599,U+671f,U+67e5,U+6807,U+6837,U+6848,U+6b64,U+6bd4,U+6c34,U+6ca1,U+6e05,U+6e90,U+7136,U+76ee,U+76f4,U+793a,U+79cd,U+7acb,U+7b2c,U+7ba1,U+7ea7,U+7ed3,U+7ed9,U+7f16,U+7f6e,U+8272,U+8282,U+82b1,U+88c5,U+89c4,U+8a00,U+8ba1,U+8ba4,U+8bae,U+8bbe,U+8bfb,U+8d28,U+8d77,U+8d85,U+8f6c,U+8f7d,U+9009,U+91cd,U+91cf,U+9891,U+ff1f;
+  unicode-range: U+4e24,U+4e3e,U+4e48,U+4e5f,U+4e8c,U+4ea4,U+4eab,U+4ece,U+4ed6,U+4efb,U+4f55,U+4f7f,U+4fdd,U+514d,U+5177,U+518c,U+51fb,U+522b,U+52a9,U+5305,U+5355,U+5357,U+5373,U+53bb,U+5458,U+56db,U+573a,U+578b,U+590d,U+5934,U+5b8c,U+5b98,U+5bfc,U+5c06,U+5c11,U+5df2,U+5e38,U+5e76,U+5e94,U+5efa,U+5feb,U+60f3,U+6216,U+6253,U+6301,U+652f,U+6599,U+671f,U+67e5,U+6807,U+6837,U+6848,U+6b64,U+6bd4,U+6c34,U+6ca1,U+6e05,U+6e90,U+7136,U+76ee,U+76f4,U+7801,U+793a,U+79cd,U+7acb,U+7b2c,U+7ba1,U+7ea7,U+7ed3,U+7ed9,U+7f16,U+7f6e,U+8272,U+8282,U+82b1,U+88c5,U+89c4,U+8a00,U+8ba1,U+8ba4,U+8bae,U+8bbe,U+8bfb,U+8d28,U+8d77,U+8d85,U+8f6c,U+8f7d,U+9009,U+91cd,U+91cf,U+9891,U+ff1f;
 }
 
 @font-face {
