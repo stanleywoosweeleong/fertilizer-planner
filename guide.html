@@ -65,6 +65,55 @@
     word-break: break-all;
   }
 
+  /* Web-address callout — appears prominently in section 1 */
+  .url-callout {
+    background: var(--green-soft);
+    border: 1.5px solid var(--green-border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 14px 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .url-callout .qr {
+    flex-shrink: 0;
+    width: 92px;
+    height: 92px;
+  }
+  .url-callout .qr img { width: 100%; height: 100%; display: block; border-radius: 6px; }
+  .url-callout .info { flex: 1; min-width: 0; }
+  .url-callout .label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green-deep);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .url-callout .addr {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green-deep);
+    word-break: break-all;
+    line-height: 1.4;
+  }
+  .url-callout .addr a {
+    color: var(--green-deep);
+    text-decoration: none;
+  }
+  .url-callout .addr a:hover { text-decoration: underline; }
+  .url-callout .hint {
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  @media (max-width: 480px) {
+    .url-callout { flex-direction: column; text-align: center; gap: 10px; }
+  }
+
   /* TOC */
   nav.toc {
     background: var(--card);
@@ -258,9 +307,38 @@
   @media print {
     body { background: #fff; }
     .wrap { max-width: none; padding: 0; }
-    header.hero { box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-    section { box-shadow: none; page-break-inside: avoid; }
-    nav.toc { page-break-after: avoid; }
+    header.hero {
+      box-shadow: none;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+    nav.toc {
+      page-break-inside: avoid;
+      break-inside: avoid;
+      page-break-after: always;
+      break-after: page;
+    }
+    section {
+      box-shadow: none;
+      page-break-inside: auto;
+      break-inside: auto;
+    }
+    section h2 {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+    section h3 {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+    table { page-break-inside: avoid; break-inside: avoid; }
+    .box  { page-break-inside: avoid; break-inside: avoid; }
+    ol.steps li, ul.steps li {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
   }
 </style>
 </head>
@@ -271,6 +349,7 @@
   <h1>Fertilizer Planner · 肥培管理</h1>
   <div class="sub">User Guide · 使用指南</div>
   <div class="sub" style="font-size:13px;margin-top:4px;">For farm staff and growers · 给农场员工和种植者使用</div>
+  <div class="url">https://stanleywoosweeleong.github.io/fertilizer-planner/</div>
 </header>
 
 <nav class="toc">
@@ -293,9 +372,20 @@
   <p>The app works in any web browser, but installing it on your home screen makes it open like a normal app — faster, full-screen, and works offline once installed.</p>
   <p class="cn" style="color:var(--muted);font-size:13.5px;">应用可在任何浏览器中使用。安装到主屏幕后可像普通应用一样使用——更快、全屏、安装后可离线使用。</p>
 
+  <div class="url-callout">
+    <div class="qr"><img src="./qr-app-url.png" alt="QR code for app URL"></div>
+    <div class="info">
+      <div class="label">App Web Address · 应用网址</div>
+      <div class="addr">
+        <a href="https://stanleywoosweeleong.github.io/fertilizer-planner/">stanleywoosweeleong.github.io/fertilizer-planner</a>
+      </div>
+      <div class="hint">Scan the QR code or type the address into your browser. · 扫描二维码或在浏览器中输入网址。</div>
+    </div>
+  </div>
+
   <h3>On Android phones <span class="cn">· 安卓手机</span></h3>
   <ol class="steps">
-    <li>Open <strong>Chrome</strong> and go to the app's web address.<span class="cn">用 Chrome 浏览器打开应用网址。</span></li>
+    <li>Open <strong>Chrome</strong> and go to the web address above.<span class="cn">用 Chrome 浏览器打开上方网址。</span></li>
     <li>Tap the <strong>⋮ menu</strong> at the top right.<span class="cn">点击右上角的 <strong>⋮ 菜单</strong>。</span></li>
     <li>Tap <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.<span class="cn">点击 <strong>"安装应用"</strong> 或 <strong>"添加到主屏幕"</strong>。</span></li>
     <li>The icon will appear on your home screen. Tap to open.<span class="cn">应用图标出现在主屏幕上。点击图标打开。</span></li>
@@ -303,7 +393,7 @@
 
   <h3>On iPhone <span class="cn">· 苹果手机</span></h3>
   <ol class="steps">
-    <li>Open <strong>Safari</strong> (not Chrome) and go to the app's web address.<span class="cn">使用 <strong>Safari</strong> 浏览器（不是 Chrome）打开应用网址。</span></li>
+    <li>Open <strong>Safari</strong> (not Chrome) and go to the web address above.<span class="cn">使用 <strong>Safari</strong> 浏览器（不是 Chrome）打开上方网址。</span></li>
     <li>Tap the <strong>Share button</strong> (square with up-arrow) at the bottom.<span class="cn">点击底部的 <strong>分享按钮</strong>（方框带向上箭头）。</span></li>
     <li>Scroll down and tap <strong>"Add to Home Screen"</strong>.<span class="cn">向下滑动，点击 <strong>"添加到主屏幕"</strong>。</span></li>
     <li>Tap <strong>Add</strong> in the top right.<span class="cn">点击右上角的 <strong>添加</strong>。</span></li>
