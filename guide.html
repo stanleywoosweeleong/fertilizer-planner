@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>User Guide · 使用指南 — Fertilizer Planner</title>
+<meta name="theme-color" content="#059669" />
+<link rel="stylesheet" href="./vendor/fonts/fonts.css" />
+<style>
+  :root {
+    --green:        #059669;
+    --green-deep:   #047857;
+    --green-soft:   #ecfdf5;
+    --green-border: #a7f3d0;
+    --ink:          #0f172a;
+    --ink-soft:     #334155;
+    --muted:        #64748b;
+    --bg:           #f8fafc;
+    --card:         #ffffff;
+    --line:         #e2e8f0;
+    --amber-soft:   #fef3c7;
+    --amber-border: #fcd34d;
+    --amber-ink:    #78350f;
+    --slate-soft:   #f1f5f9;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "DM Sans", "Noto Sans SC", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 24px 18px 80px; }
+
+  /* Header */
+  header.hero {
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%);
+    color: #fff;
+    border-radius: 18px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 14px rgba(5, 102, 75, 0.18);
+  }
+  header.hero h1 {
+    margin: 0 0 4px 0;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  header.hero .sub {
+    opacity: 0.92;
+    font-size: 14.5px;
+    font-weight: 500;
+  }
+  header.hero .url {
+    margin-top: 14px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12.5px;
+    background: rgba(255,255,255,0.18);
+    padding: 6px 10px;
+    border-radius: 8px;
+    display: inline-block;
+    word-break: break-all;
+  }
+
+  /* TOC */
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+  nav.toc .toc-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 22px;
+    font-size: 14.5px;
+  }
+  nav.toc li { margin: 4px 0; }
+  nav.toc a { color: var(--green-deep); text-decoration: none; font-weight: 500; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  /* Section */
+  section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 22px 4px;
+    margin-bottom: 18px;
+  }
+  section h2 {
+    margin: 0 0 4px 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  section h2 .num {
+    display: inline-block;
+    width: 26px; height: 26px;
+    line-height: 26px;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 10px;
+    vertical-align: 2px;
+  }
+  section h2 .cn { color: var(--muted); font-weight: 600; font-size: 16px; }
+  section h3 {
+    margin: 18px 0 6px 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--green-deep);
+  }
+  section h3 .cn { color: var(--muted); font-weight: 600; font-size: 14px; }
+  section p { margin: 8px 0; font-size: 14.5px; color: var(--ink-soft); }
+
+  /* Bilingual row */
+  .bi {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 18px;
+    margin: 10px 0;
+    font-size: 14.5px;
+  }
+  .bi .en, .bi .cn { padding: 2px 0; }
+  .bi .cn { color: var(--ink-soft); }
+  @media (max-width: 560px) {
+    .bi { grid-template-columns: 1fr; gap: 2px 0; }
+    .bi .cn { color: var(--muted); font-size: 13.5px; padding-bottom: 6px; }
+  }
+
+  /* Step list */
+  ol.steps, ul.steps {
+    margin: 10px 0;
+    padding-left: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+  ol.steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 8px 8px 8px 38px;
+    margin-bottom: 6px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+  ol.steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 6px; top: 8px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--green-soft);
+    color: var(--green-deep);
+    border: 1.5px solid var(--green-border);
+    font-weight: 700;
+    font-size: 12px;
+    text-align: center;
+    line-height: 20px;
+  }
+  ol.steps li .cn {
+    display: block;
+    color: var(--muted);
+    font-size: 13.5px;
+    margin-top: 2px;
+  }
+
+  /* Tag chips */
+  .chip {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 2px;
+    background: var(--slate-soft);
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .chip.green { background: var(--green-soft); color: var(--green-deep); border-color: var(--green-border); }
+
+  /* Tip / warning boxes */
+  .box {
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  .box.tip {
+    background: var(--green-soft);
+    border: 1px solid var(--green-border);
+    color: var(--green-deep);
+  }
+  .box.warn {
+    background: var(--amber-soft);
+    border: 1px solid var(--amber-border);
+    color: var(--amber-ink);
+  }
+  .box strong { font-weight: 700; }
+
+  /* Stage table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 13.5px;
+  }
+  table th, table td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  table th {
+    background: var(--slate-soft);
+    color: var(--muted);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  table td .cn { color: var(--muted); font-size: 12.5px; display: block; margin-top: 1px; }
+  .pill {
+    display: inline-block;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    line-height: 22px;
+    font-weight: 700;
+    font-size: 12px;
+    margin-right: 6px;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12.5px;
+  }
+
+  /* Print */
+  @media print {
+    body { background: #fff; }
+    .wrap { max-width: none; padding: 0; }
+    header.hero { box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    section { box-shadow: none; page-break-inside: avoid; }
+    nav.toc { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>Fertilizer Planner · 肥培管理</h1>
+  <div class="sub">User Guide · 使用指南</div>
+  <div class="sub" style="font-size:13px;margin-top:4px;">For farm staff and growers · 给农场员工和种植者使用</div>
+</header>
+
+<nav class="toc">
+  <div class="toc-label">Contents · 目录</div>
+  <ol>
+    <li><a href="#install">Install the app on your phone · 安装应用到手机</a></li>
+    <li><a href="#open">Open the app · 打开应用</a></li>
+    <li><a href="#use">Set your tree details · 选择树的资料</a></li>
+    <li><a href="#read">Read the recommendation · 查看施肥建议</a></li>
+    <li><a href="#stages">The 9 growth stages · 九个生长阶段</a></li>
+    <li><a href="#tips">Practical tips · 实用建议</a></li>
+    <li><a href="#trouble">Problems? · 遇到问题？</a></li>
+  </ol>
+</nav>
+
+<!-- 1. INSTALL ------------------------------------------------------------ -->
+<section id="install">
+  <h2><span class="num">1</span>Install the app on your phone <span class="cn">安装应用到手机</span></h2>
+
+  <p>The app works in any web browser, but installing it on your home screen makes it open like a normal app — faster, full-screen, and works offline once installed.</p>
+  <p class="cn" style="color:var(--muted);font-size:13.5px;">应用可在任何浏览器中使用。安装到主屏幕后可像普通应用一样使用——更快、全屏、安装后可离线使用。</p>
+
+  <h3>On Android phones <span class="cn">· 安卓手机</span></h3>
+  <ol class="steps">
+    <li>Open <strong>Chrome</strong> and go to the app's web address.<span class="cn">用 Chrome 浏览器打开应用网址。</span></li>
+    <li>Tap the <strong>⋮ menu</strong> at the top right.<span class="cn">点击右上角的 <strong>⋮ 菜单</strong>。</span></li>
+    <li>Tap <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.<span class="cn">点击 <strong>"安装应用"</strong> 或 <strong>"添加到主屏幕"</strong>。</span></li>
+    <li>The icon will appear on your home screen. Tap to open.<span class="cn">应用图标出现在主屏幕上。点击图标打开。</span></li>
+  </ol>
+
+  <h3>On iPhone <span class="cn">· 苹果手机</span></h3>
+  <ol class="steps">
+    <li>Open <strong>Safari</strong> (not Chrome) and go to the app's web address.<span class="cn">使用 <strong>Safari</strong> 浏览器（不是 Chrome）打开应用网址。</span></li>
+    <li>Tap the <strong>Share button</strong> (square with up-arrow) at the bottom.<span class="cn">点击底部的 <strong>分享按钮</strong>（方框带向上箭头）。</span></li>
+    <li>Scroll down and tap <strong>"Add to Home Screen"</strong>.<span class="cn">向下滑动，点击 <strong>"添加到主屏幕"</strong>。</span></li>
+    <li>Tap <strong>Add</strong> in the top right.<span class="cn">点击右上角的 <strong>添加</strong>。</span></li>
+  </ol>
+
+  <div class="box tip">
+    <strong>Tip · 提示:</strong> Once installed, the app works even without internet, except for the first time you open it. Save the icon to your home screen for quick access in the orchard.
+    <br><br>
+    <span style="color:var(--ink-soft);">安装后即使没有网络也可使用（首次打开除外）。把图标保存到主屏幕，方便在果园中快速使用。</span>
+  </div>
+</section>
+
+<!-- 2. OPEN --------------------------------------------------------------- -->
+<section id="open">
+  <h2><span class="num">2</span>Open the app <span class="cn">打开应用</span></h2>
+
+  <p>Tap the green leaf icon on your home screen. The app loads in seconds.</p>
+  <p class="cn" style="color:var(--muted);font-size:13.5px;">点击主屏幕上的绿色叶子图标。应用几秒内即可打开。</p>
+
+  <p>When the app opens, you'll see today's date already filled in, and the planner ready to go. You don't need to log in or create an account.</p>
+  <p class="cn" style="color:var(--muted);font-size:13.5px;">应用打开后，今天的日期已自动填入，规划器即可使用。不需要登录或注册账号。</p>
+</section>
+
+<!-- 3. USE ---------------------------------------------------------------- -->
+<section id="use">
+  <h2><span class="num">3</span>Set your tree details <span class="cn">选择树的资料</span></h2>
+
+  <p>The app needs four pieces of information to give you the right dose:</p>
+  <p class="cn" style="color:var(--muted);font-size:13.5px;">应用需要四项资料来计算正确用量：</p>
+
+  <h3>① Clone <span class="cn">· 品种</span></h3>
+  <div class="bi">
+    <div class="en">Pick the variety of your durian tree from the dropdown — e.g. <strong>Musang King (猫山王 / D197)</strong>, <strong>Black Thorn (黑刺 / D200)</strong>, <strong>Monthong (金枕 / D159)</strong>.</div>
+    <div class="cn">从下拉菜单选择品种——例如 <strong>猫山王 D197</strong>、<strong>黑刺 D200</strong>、<strong>金枕 D159</strong>。</div>
+  </div>
+  <div class="bi">
+    <div class="en">Each clone has a slightly different growing pace. The stage durations and harvest date adjust automatically.</div>
+    <div class="cn">每个品种的生长速度略有不同。各阶段时长和预计收成日期会自动调整。</div>
+  </div>
+
+  <h3>② Date <span class="cn">· 日期</span></h3>
+  <div class="bi">
+    <div class="en">Today's date is filled in by default. Change it only if you want to plan for a future date or look back at a past stage.</div>
+    <div class="cn">默认填入今天日期。如需规划未来或查看过去阶段，可手动修改。</div>
+  </div>
+
+  <h3>③ Mode <span class="cn">· 施肥方式</span></h3>
+  <p>Choose how you want to fertilize:</p>
+  <ul class="steps" style="padding-left:0;">
+    <li style="padding-left:8px;list-style:none;"><span class="chip green">🌿 Organic 有机</span> — pure organic compost, granule, and foliar products.<span class="cn">纯有机：堆肥、粒肥和叶面肥。</span></li>
+    <li style="padding-left:8px;list-style:none;"><span class="chip">⚗️ SKO 综合</span> — combination of organic + chemical. Used in rotation for cost balance.<span class="cn">综合方案：有机与化肥轮换施用，平衡成本。</span></li>
+  </ul>
+  <p style="font-size:13.5px;color:var(--muted);"><em>The Chemical-only mode is shown alongside for reference — you can compare doses across modes.</em><br>纯化肥方案会一并显示，方便对比各方案的用量。</p>
+
+  <h3>④ Tree Age <span class="cn">· 树龄</span></h3>
+  <div class="bi">
+    <div class="en">Pick the tree's age band. The app supports five tiers:</div>
+    <div class="cn">选择树龄段。应用支持五个等级：</div>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Tier · 等级</th><th>Size · 树形</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0–1 yr <span class="cn">0–1年</span></td><td>3–5 ft seedling <span class="cn">3–5尺幼苗</span></td></tr>
+      <tr><td>1–2 yr <span class="cn">1–2年</span></td><td>Young tree <span class="cn">幼龄树</span></td></tr>
+      <tr><td>3–4 yr <span class="cn">3–4年</span></td><td>Establishing tree <span class="cn">壮龄树</span></td></tr>
+      <tr><td>5+ yr <span class="cn">5年以上</span></td><td>Large tree, starts bearing <span class="cn">大型树，开始结果</span></td></tr>
+      <tr><td>10+ yr <span class="cn">10年以上</span></td><td>Mature large tree <span class="cn">成熟大树</span></td></tr>
+    </tbody>
+  </table>
+  <div class="box warn">
+    <strong>Important · 重要:</strong> Trees younger than 5 years are not at bearing age. The app will show flowering stages, but <strong>do not force-induce flowering</strong> before the tree is ready. Minimum 5 years.
+    <br><br>
+    <span>未满5年的树尚未达到结果期。应用会显示开花阶段，但<strong>请勿在树未准备好前强制催花</strong>。最低需 5 年。</span>
+  </div>
+</section>
+
+<!-- 4. READ --------------------------------------------------------------- -->
+<section id="read">
+  <h2><span class="num">4</span>Read the recommendation <span class="cn">查看施肥建议</span></h2>
+
+  <p>Once your four inputs are set, scroll down to see the current stage card. It shows:</p>
+  <p class="cn" style="color:var(--muted);font-size:13.5px;">设置好四项资料后，向下滑动查看当前阶段卡片，包括：</p>
+
+  <ol class="steps">
+    <li><strong>Current stage</strong> — which of the 9 growth stages your tree is in today.<span class="cn"><strong>目前阶段</strong>——树今天处于九个生长阶段中的哪一个。</span></li>
+    <li><strong>Product list</strong> — what to apply, in the order they should be used.<span class="cn"><strong>产品清单</strong>——按使用顺序列出。</span></li>
+    <li><strong>Dose</strong> — how much per tree (kg/tree), automatically scaled to your tree's age tier.<span class="cn"><strong>用量</strong>——每棵树多少公斤，按树龄自动换算。</span></li>
+    <li><strong>Frequency</strong> — how often to apply (e.g. monthly, weekly, every 2–3 days).<span class="cn"><strong>频率</strong>——多久施一次（如每月、每周、每 2–3 天）。</span></li>
+    <li><strong>Type chip</strong> — tells you what kind of product: <span class="chip">堆肥 Compost</span> <span class="chip">粒肥 Granule</span> <span class="chip">叶面 Foliar</span> <span class="chip">化肥 Chemical</span>.<span class="cn"><strong>类型标签</strong>——告诉你这是什么类别的肥料。</span></li>
+  </ol>
+
+  <div class="box tip">
+    <strong>Dose example · 用量举例:</strong>
+    <br>
+    For a <strong>10+ year</strong> Musang King in the <strong>Vegetative</strong> stage with the <strong>Organic</strong> mode, you might see:
+    <br><em>Base Compost EXTRA · 20–25 kg/tree · Monthly (Rotation 1/3)</em>.
+    <br><br>
+    <span style="color:var(--ink-soft);">10年以上的猫山王在营养生长期、有机方案下，可能会看到：</span><br>
+    <span style="color:var(--ink-soft);"><em>超级堆肥 · 20–25 公斤/树 · 每月一次（轮换 1/3）</em>。</span>
+  </div>
+
+  <h3>Showing other stages <span class="cn">· 查看其他阶段</span></h3>
+  <p>Tap the stage numbers (1–9) at the top to jump to any stage. You can also toggle "Past stages" or "Upcoming stages" to plan ahead or review what's been done.</p>
+  <p class="cn" style="color:var(--muted);font-size:13.5px;">点击上方的阶段编号（1–9）跳转到任何阶段。也可切换"已过阶段"或"即将到来的阶段"来回顾或预先规划。</p>
+</section>
+
+<!-- 5. STAGES ------------------------------------------------------------- -->
+<section id="stages">
+  <h2><span class="num">5</span>The 9 growth stages <span class="cn">九个生长阶段</span></h2>
+
+  <p>Durian trees go through a yearly cycle. Each stage needs a different nutrient mix:</p>
+  <p class="cn" style="color:var(--muted);font-size:13.5px;">榴莲树每年经历以下九个阶段，每个阶段所需养分不同：</p>
+
+  <table>
+    <thead><tr><th>#</th><th>Stage</th><th>阶段</th><th>What's happening · 此时</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill" style="background:#3B6D11">1</span></td><td>Vegetative</td><td>营养生长期</td><td>Tree builds canopy · 培育树冠</td></tr>
+      <tr><td><span class="pill" style="background:#BA7517">2</span></td><td>Pre-Flowering</td><td>催花期</td><td>Trigger flower buds · 诱导花芽</td></tr>
+      <tr><td><span class="pill" style="background:#D4537E">3</span></td><td>Full Bloom</td><td>开花期</td><td>Flowers open · 花朵盛开</td></tr>
+      <tr><td><span class="pill" style="background:#185FA5">4</span></td><td>Fruit Set</td><td>坐果初期</td><td>Young fruits form · 幼果形成</td></tr>
+      <tr><td><span class="pill" style="background:#D85A30">5</span></td><td>1st Culling</td><td>第一波落果</td><td>Natural fruit drop · 自然落果</td></tr>
+      <tr><td><span class="pill" style="background:#D85A30">6</span></td><td>2nd Culling</td><td>第二波落果</td><td>Second drop · 二次落果</td></tr>
+      <tr><td><span class="pill" style="background:#1D9E75">7</span></td><td>Expansion</td><td>膨果期</td><td>Fruits grow fast · 果实膨大</td></tr>
+      <tr><td><span class="pill" style="background:#639922">8</span></td><td>Maturation</td><td>成熟落果</td><td>Fruits ripen and drop · 果实成熟落地</td></tr>
+      <tr><td><span class="pill" style="background:#0C447C">9</span></td><td>Post-harvest</td><td>采收后恢复</td><td>Tree recovers strength · 树势恢复</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box warn">
+    <strong>During Full Bloom (Stage 3) · 开花期间（第3阶段）:</strong> Do <strong>not</strong> apply granular fertilizer or pesticides. Use only foliar sprays. Protect nocturnal pollinators (bats, moths).
+    <br><br>
+    <span>开花期间<strong>不要</strong>施粒状肥料或农药。仅使用叶面肥。保护夜间授粉者（蝙蝠、蛾）。</span>
+  </div>
+</section>
+
+<!-- 6. TIPS --------------------------------------------------------------- -->
+<section id="tips">
+  <h2><span class="num">6</span>Practical tips <span class="cn">实用建议</span></h2>
+
+  <h3>① Apply early in the morning or late afternoon <span class="cn">· 清晨或傍晚施肥</span></h3>
+  <p style="font-size:13.5px;color:var(--ink-soft);">Avoid midday heat. The tree absorbs nutrients better when it's cool.</p>
+  <p style="font-size:13.5px;color:var(--muted);">避免中午高温。低温时树木吸收养分更好。</p>
+
+  <h3>② Foliar sprays at 1:500 dilution <span class="cn">· 叶面肥 1:500 倍稀释</span></h3>
+  <p style="font-size:13.5px;color:var(--ink-soft);">When the app says "Foliar · 1:500 dilution", mix 1 part product to 500 parts water. For 20 L water, use about 40 mL of product.</p>
+  <p style="font-size:13.5px;color:var(--muted);">应用显示"叶面 · 1:500 倍稀释"时，1 份产品配 500 份水。20 升水加入约 40 毫升产品。</p>
+
+  <h3>③ Rotation matters <span class="cn">· 轮换很重要</span></h3>
+  <p style="font-size:13.5px;color:var(--ink-soft);">In stages with "Rotation 1/3, 2/3, 3/3", use a different product each month. Don't apply all three in the same month.</p>
+  <p style="font-size:13.5px;color:var(--muted);">显示"轮换 1/3, 2/3, 3/3"的阶段，每月施用不同产品。请勿同月同时施用三种。</p>
+
+  <h3>④ Watering during Pre-Flowering <span class="cn">· 催花期间停水</span></h3>
+  <p style="font-size:13.5px;color:var(--ink-soft);">Stop irrigation during the Pre-Flowering stage. Water stress helps trigger flowering. Resume normal watering after Fruit Set.</p>
+  <p style="font-size:13.5px;color:var(--muted);">催花阶段停止灌溉。水分胁迫有助诱导开花。坐果后恢复正常灌溉。</p>
+
+  <h3>⑤ When in doubt, ask <span class="cn">· 不确定时请询问</span></h3>
+  <p style="font-size:13.5px;color:var(--ink-soft);">This planner is a guide. Trees are living things — if something looks unusual (yellowing leaves, no flowers, fruit drop), ask your supervisor or agronomist before changing the plan.</p>
+  <p style="font-size:13.5px;color:var(--muted);">本规划器仅供参考。树是活的——如出现异常（叶黄、不开花、落果），请先咨询主管或农艺师再调整方案。</p>
+</section>
+
+<!-- 7. TROUBLESHOOT ------------------------------------------------------- -->
+<section id="trouble">
+  <h2><span class="num">7</span>Problems? <span class="cn">遇到问题？</span></h2>
+
+  <h3>The app won't open <span class="cn">· 应用无法打开</span></h3>
+  <p style="font-size:13.5px;color:var(--ink-soft);">If you have no internet on the very first time, the app can't load. Connect to Wi-Fi once, open the app, then it will work offline after that.</p>
+  <p style="font-size:13.5px;color:var(--muted);">首次打开需联网。连接 Wi-Fi 后打开一次，之后即可离线使用。</p>
+
+  <h3>The page looks broken <span class="cn">· 页面显示异常</span></h3>
+  <p style="font-size:13.5px;color:var(--ink-soft);">Close the app fully and reopen it. If still broken, uninstall (long-press the icon → Remove) and reinstall using the steps in Section 1.</p>
+  <p style="font-size:13.5px;color:var(--muted);">完全关闭应用后重新打开。如仍异常，卸载（长按图标→移除）后按第 1 节重新安装。</p>
+
+  <h3>Doses look wrong <span class="cn">· 用量看起来不对</span></h3>
+  <p style="font-size:13.5px;color:var(--ink-soft);">Check your <strong>Tree Age</strong> selection at the top. Doses scale automatically — if you picked the wrong age band, the numbers will be off. The app uses the 10+ year dose as the baseline and scales down for younger trees.</p>
+  <p style="font-size:13.5px;color:var(--muted);">请检查顶部的<strong>树龄</strong>选择。用量按树龄自动换算——选错树龄会导致数值不对。应用以 10 年以上树为基准，幼树按比例缩减。</p>
+
+  <h3>The language is mixed <span class="cn">· 语言混合显示</span></h3>
+  <p style="font-size:13.5px;color:var(--ink-soft);">That's by design. The app shows English and Chinese side-by-side so the whole team can read it.</p>
+  <p style="font-size:13.5px;color:var(--muted);">这是设计如此。应用同时显示中英文，方便整个团队阅读。</p>
+</section>
+
+<footer>
+  <p>Fertilizer Planner · 肥培管理</p>
+  <p>This guide accompanies the web app. For dosing details beyond what's in the app, refer to the official product booklet.<br>
+  本指南配合网页应用使用。如需更详细的用量资料，请参阅官方产品手册。</p>
+</footer>
+
+</div>
+</body>
+</html>

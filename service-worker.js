@@ -1,6 +1,6 @@
 // Fertilizer Planner · Service Worker
 // Bump CACHE_VERSION whenever the app shell changes to force an update.
-const CACHE_VERSION = 'v1.1.0';
+const CACHE_VERSION = 'v1.2.0';
 const CACHE_NAME = `fert-planner-${CACHE_VERSION}`;
 
 // App shell — relative paths so it works at any GitHub Pages sub-path.
@@ -8,6 +8,7 @@ const CACHE_NAME = `fert-planner-${CACHE_VERSION}`;
 const APP_SHELL = [
   './',
   './index.html',
+  './guide.html',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
