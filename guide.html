@@ -303,10 +303,35 @@
     font-size: 12.5px;
   }
 
+  /* Back-to-app link (top + bottom of guide) */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--card);
+    border: 1px solid var(--green-border);
+    color: var(--green-deep);
+    border-radius: 50%;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 14px;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .back-link:hover { background: var(--green-soft); }
+  .back-link:active { transform: scale(0.95); }
+  .back-link .arrow { font-size: 20px; line-height: 1; }
+  .back-bottom {
+    text-align: center;
+    margin: 30px 0 10px;
+  }
+
   /* Print */
   @media print {
     body { background: #fff; }
     .wrap { max-width: none; padding: 0; }
+    .back-link, .back-bottom { display: none !important; }
     header.hero {
       box-shadow: none;
       print-color-adjust: exact;
@@ -344,6 +369,8 @@
 </head>
 <body>
 <div class="wrap">
+
+<a href="./index.html" class="back-link" aria-label="Back to app · 返回"><span class="arrow">←</span></a>
 
 <header class="hero">
   <h1>Fertilizer Planner · 肥培管理</h1>
@@ -582,6 +609,10 @@
   <p>This guide accompanies the web app. For dosing details beyond what's in the app, refer to the official product booklet.<br>
   本指南配合网页应用使用。如需更详细的用量资料，请参阅官方产品手册。</p>
 </footer>
+
+<div class="back-bottom">
+  <a href="./index.html" class="back-link" aria-label="Back to app · 返回"><span class="arrow">←</span></a>
+</div>
 
 </div>
 </body>
